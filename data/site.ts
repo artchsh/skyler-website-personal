@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Skyler",
   title: "Web Systems Engineer",
-  url: "https://1410666.xyz",
+  url: "https://1410666.xyz/",
   email: "october.skyler@proton.me",
   github: "https://github.com/artchsh",
   x: "https://x.com/october_skyler",
@@ -12,10 +12,6 @@ export const siteConfig = {
   cvAvailable: false,
   description:
     "Skyler is a web systems engineer working across interfaces, content systems, infrastructure, deployments, servers, and self-hosted tools.",
-  openGraphDescription:
-    "Interfaces, infrastructure, content systems, deployments, servers, and the machinery holding them together.",
-  twitterDescription:
-    "Web systems, infrastructure, self-hosting, content architecture, and tools for things that should have been simple.",
 } as const;
 
 export const escapedSystems = [

@@ -49,7 +49,18 @@ bun run cf-typegen
 
 `wrangler.jsonc` enables `nodejs_compat`, points static assets at `.open-next/assets`, and uses a current compatibility date. `open-next.config.ts` deliberately has no R2 incremental cache because this project uses no external storage. OpenNext builds require a supported Node.js runtime even when Bun is the package manager; the deployed app runs in Cloudflare's Workers runtime.
 
-The social preview is the repository-local `public/og-image.svg`; it avoids runtime image rendering and its native/WASM dependencies in the Worker bundle.
+The social preview is the repository-local `public/og-image.png`, generated from the editable `public/og-image.svg` source. Static artwork avoids runtime image rendering and its native/WASM dependencies in the Worker bundle.
+
+## Canonical redirects
+
+Cloudflare must normalize every alternate scheme and hostname to `https://1410666.xyz/` while preserving paths and query strings:
+
+1. In the `1410666.xyz` zone, open **SSL/TLS → Edge Certificates** and enable **Always Use HTTPS**. This permanently upgrades `http://1410666.xyz/*` and `http://www.1410666.xyz/*` without changing the path or query string.
+2. Open **Rules → Redirect Rules → Single Redirects** and create a rule named `Canonical www redirect`.
+3. Match the custom filter expression `(http.host eq "www.1410666.xyz")`.
+4. Choose a dynamic redirect with destination expression `concat("https://1410666.xyz", http.request.uri.path)`, status code `301`, and **Preserve query string** enabled.
+
+The redirect rule handles `https://www.1410666.xyz/*`; together with Always Use HTTPS it also normalizes HTTP `www` requests. Ensure `www` is proxied in Cloudflare DNS so the rule can run.
 
 ## Site configuration
 
