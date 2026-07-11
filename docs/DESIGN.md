@@ -54,7 +54,7 @@ The lavender period gives the name a small authored detail. Navigation is hidden
 
 ## Hero
 
-The hero combines a concise identity sentence with the main heading. The heading uses a fluid system-font scale from 3.5rem to 5.8rem on desktop and from 2.6rem to 4.2rem on mobile. It uses balanced wrapping where supported, tight readable line height, and no manual staircase line breaks.
+The hero positions Skyler as a web systems engineer working across interfaces, infrastructure, content systems, and their connecting machinery. It combines that concise identity sentence with the main heading. The heading uses a fluid system-font scale from 3.5rem to 5.8rem on desktop and from 2.6rem to 4.2rem on mobile. It uses balanced wrapping where supported, tight readable line height, and no manual staircase line breaks.
 
 Only `problems for myself.` uses the lavender accent. Its single interaction slightly changes tracking and shifts the phrase by two pixels on hover. There is no underline, pointer follower, continuous animation, or decorative background effect.
 

@@ -1,10 +1,10 @@
-import { isConfiguredSocialUrl, siteConfig } from "@/data/site";
+import { siteConfig } from "@/data/site";
 
 export function ExternalLinks() {
   const links = [
-    { label: "GitHub", href: siteConfig.github, configured: isConfiguredSocialUrl(siteConfig.github) },
-    { label: "Email", href: `mailto:${siteConfig.email}`, configured: true },
-    { label: "X", href: siteConfig.x, configured: isConfiguredSocialUrl(siteConfig.x) },
+    { label: "GitHub", href: siteConfig.github },
+    { label: "Email", href: `mailto:${siteConfig.email}` },
+    { label: "X", href: siteConfig.x },
   ] as const;
 
   return (
@@ -13,19 +13,15 @@ export function ExternalLinks() {
         <ul className="link-list">
           {links.map((link) => (
             <li key={link.label}>
-              {link.configured ? (
-                <a
-                  href={link.href}
-                  target={link.label === "Email" ? undefined : "_blank"}
-                  rel={link.label === "Email" ? undefined : "noopener noreferrer"}
-                >
-                  <span>{link.label}</span>
-                  <span aria-hidden="true">↗</span>
-                  {link.label !== "Email" && <span className="sr-only"> (opens in a new tab)</span>}
-                </a>
-              ) : (
-                <span className="pending-link" aria-label={`${link.label}, coming soon`}>{link.label}</span>
-              )}
+              <a
+                href={link.href}
+                target={link.label === "Email" ? undefined : "_blank"}
+                rel={link.label === "Email" ? undefined : "noopener noreferrer"}
+              >
+                <span>{link.label}</span>
+                <span aria-hidden="true">↗</span>
+                {link.label !== "Email" && <span className="sr-only"> (opens in a new tab)</span>}
+              </a>
             </li>
           ))}
           <li>

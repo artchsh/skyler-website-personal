@@ -1,5 +1,6 @@
 export const siteConfig = {
   name: "Skyler",
+  title: "Web Systems Engineer",
   url: "https://1410666.xyz",
   email: "october.skyler@proton.me",
   github: "https://github.com/artchsh",
@@ -10,7 +11,11 @@ export const siteConfig = {
   // Set to true after adding public/skyler-cv.pdf.
   cvAvailable: false,
   description:
-    "Frontend developer working between interfaces, content systems, and infrastructure, with a preference for fast websites and understandable architecture.",
+    "Skyler is a web systems engineer working across interfaces, content systems, infrastructure, deployments, servers, and self-hosted tools.",
+  openGraphDescription:
+    "Interfaces, infrastructure, content systems, deployments, servers, and the machinery holding them together.",
+  twitterDescription:
+    "Web systems, infrastructure, self-hosting, content architecture, and tools for things that should have been simple.",
 } as const;
 
 export const escapedSystems = [
@@ -23,16 +28,13 @@ export const escapedSystems = [
   {
     name: "The home lab that kept growing",
     description:
-      "Monitoring, networking, storage, media, automation, and enough containers to turn a Raspberry Pi into a minor administrative responsibility.",
+      "A self-hosted collection of networking, monitoring, storage, media, automation, and infrastructure services that gradually became its own tiny ecosystem.",
     tags: ["Docker", "Cloudflare", "Tailscale", "nginx"],
   },
   {
     name: "Tools for things that should have been simple",
     description:
-      "Utilities for multilingual CMS projects, deployments, metadata, search, migration, and other jobs that began with a dangerously optimistic estimate.",
+      "Utilities and integrations for multilingual CMS projects, deployment pipelines, metadata, search, migrations, and other jobs that started with a dangerously optimistic estimate.",
     tags: ["MODX", "Next.js", "TypeScript", "CMS"],
   },
 ] as const;
-
-export const isConfiguredSocialUrl = (url: string) =>
-  !url.includes("REPLACE_ME");

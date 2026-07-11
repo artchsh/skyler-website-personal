@@ -1,6 +1,6 @@
 # Skyler's personal website
 
-A dark, typography-led single-page personal site for Skyler. The page is server-rendered and uses CSS-only interactions.
+A personal website for Skyler, a web systems engineer working across interfaces, infrastructure, content systems, and self-hosted tools.
 
 ## Stack
 
@@ -51,9 +51,9 @@ bun run cf-typegen
 
 The social preview is the repository-local `public/og-image.svg`; it avoids runtime image rendering and its native/WASM dependencies in the Worker bundle.
 
-## Replace before launch
+## Site configuration
 
-Profile details are configured in `data/site.ts`. The canonical production origin is `https://1410666.xyz`, and `wrangler.jsonc` deploys the Worker to that custom domain.
+Identity, site URL, email, GitHub, X, Discord, and résumé settings are configured in `data/site.ts`. The canonical production origin is `https://1410666.xyz`, and `wrangler.jsonc` deploys the Worker to that custom domain.
 
 Place the real résumé at `public/skyler-cv.pdf`, then set `siteConfig.cvAvailable` to `true`. Until then, the public UI shows a disabled `Résumé soon` label; `public/CV-PLACEHOLDER.md` records the expected path.
 

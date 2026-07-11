@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Skyler — Frontend & Infrastructure",
+    default: `${siteConfig.name} — ${siteConfig.title}`,
     template: "%s / Skyler",
   },
   description: siteConfig.description,
@@ -15,16 +15,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     url: "/",
-    title: "Skyler — Frontend & Infrastructure",
-    description: siteConfig.description,
+    title: `${siteConfig.name} — ${siteConfig.title}`,
+    description: siteConfig.openGraphDescription,
     siteName: "Skyler",
     locale: "en_US",
-    images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "Skyler — Frontend & Infrastructure" }],
+    images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "Skyler — Web Systems Engineer" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Skyler — Frontend & Infrastructure",
-    description: siteConfig.description,
+    title: `${siteConfig.name} — ${siteConfig.title}`,
+    description: siteConfig.twitterDescription,
     images: ["/og-image.svg"],
   },
   robots: { index: true, follow: true },

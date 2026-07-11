@@ -33,6 +33,8 @@ This version improved simplicity and mobile readability, but the narrow centered
 
 The current design replaced the centered column with a maximum 78rem asymmetric composition. Desktop uses a 58/42 two-column grid, while mobile and tablet use an explicit single-column order. Copy, project titles, and descriptions were rewritten to feel more personal and specific.
 
+The identity was subsequently broadened from interface-focused positioning to `Web Systems Engineer`, reflecting work across web interfaces, CMS and content architecture, integrations, deployments, servers, self-hosted infrastructure, automation, and the glue connecting those layers.
+
 The following were removed during this pass:
 
 - The design Client Component and reveal observer
