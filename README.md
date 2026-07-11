@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Skyler's personal website
 
-## Getting Started
+A dark, typography-led single-page personal site for Skyler. The page is server-rendered and uses CSS-only interactions.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 App Router, React 19, and TypeScript
+- Tailwind CSS 4 with custom semantic CSS variables
+- OpenNext for Cloudflare and Wrangler
+- Cloudflare Workers Static Assets
+
+## Development
+
+This repository uses Bun.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
+bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`. Essential content and links are rendered on the server and remain available without JavaScript.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Checks and builds
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+bun run lint
+bun run typecheck
+bun run build
+bun run build:cloudflare
+```
 
-## Learn More
+Preview the generated Worker locally with workerd:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+bun run preview
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Deploy to the configured Cloudflare account:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+bun run deploy
+```
 
-## Deploy on Vercel
+Generate Cloudflare binding types after changing `wrangler.jsonc`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+bun run cf-typegen
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`wrangler.jsonc` enables `nodejs_compat`, points static assets at `.open-next/assets`, and uses a current compatibility date. `open-next.config.ts` deliberately has no R2 incremental cache because this project uses no external storage. OpenNext builds require a supported Node.js runtime even when Bun is the package manager; the deployed app runs in Cloudflare's Workers runtime.
+
+The social preview is the repository-local `public/og-image.svg`; it avoids runtime image rendering and its native/WASM dependencies in the Worker bundle.
+
+## Replace before launch
+
+Profile details are configured in `data/site.ts`. The canonical production origin is `https://1410666.xyz`, and `wrangler.jsonc` deploys the Worker to that custom domain.
+
+Place the real résumé at `public/skyler-cv.pdf`, then set `siteConfig.cvAvailable` to `true`. Until then, the public UI shows a disabled `Résumé soon` label; `public/CV-PLACEHOLDER.md` records the expected path.
+
+The site has no database, external storage, analytics, CMS, authentication, or backend service.
