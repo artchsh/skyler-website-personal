@@ -1,11 +1,13 @@
-import { useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { EscapedProjects } from "@/components/escaped-projects";
 import { ExternalLinks } from "@/components/external-links";
 import { SiteHeader } from "@/components/site-header";
 import { siteConfig } from "@/data/site";
 
-export default function Home() {
-  const t = useTranslations();
+export default async function Home({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations();
   const sameAs = [siteConfig.github, siteConfig.x, siteConfig.discordUrl];
   const personSchema = {
     "@context": "https://schema.org",
