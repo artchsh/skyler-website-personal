@@ -25,13 +25,16 @@ export async function generateMetadata({
     description: t("description"),
     alternates: {
       canonical: `/${locale}`,
-      languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}`])),
+      languages: {
+        ...Object.fromEntries(routing.locales.map((l) => [l, `/${l}`])),
+        "x-default": `/${routing.defaultLocale}`,
+      },
     },
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,
     openGraph: {
       type: "profile",
-      url: "/",
+      url: `/${locale}`,
       title: t("title"),
       description: t("description"),
       siteName: "Skyler",

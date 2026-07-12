@@ -9,15 +9,21 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   setRequestLocale(locale);
   const t = await getTranslations();
   const sameAs = [siteConfig.github, siteConfig.x, siteConfig.discordUrl];
+  const pageUrl = new URL(`/${locale}`, siteConfig.url).toString();
   const personSchema = {
-    "@context": "https://schema.org",
     "@type": "Person",
     name: siteConfig.name,
-    url: siteConfig.url,
+    url: pageUrl,
     email: `mailto:${siteConfig.email}`,
     jobTitle: siteConfig.title,
     description: siteConfig.description,
     ...(sameAs.length > 0 ? { sameAs } : {}),
+  };
+  const profileSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    url: pageUrl,
+    mainEntity: personSchema,
   };
 
   return (
@@ -46,7 +52,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       </div>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema).replace(/</g, "\\u003c") }}
       />
     </>
   );

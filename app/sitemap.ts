@@ -1,6 +1,14 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/data/site";
+import { routing } from "@/i18n/routing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: siteConfig.url, changeFrequency: "monthly", priority: 1 }];
+  const lastModified = new Date();
+
+  return routing.locales.map((locale) => ({
+    url: new URL(`/${locale}`, siteConfig.url).toString(),
+    lastModified,
+    changeFrequency: "monthly",
+    priority: locale === routing.defaultLocale ? 1 : 0.9,
+  }));
 }
