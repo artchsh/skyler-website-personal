@@ -24,8 +24,8 @@ export async function generateMetadata({
     },
     description: t("description"),
     alternates: {
-      canonical: "/",
-      languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l === routing.defaultLocale ? "" : l}`])),
+      canonical: `/${locale}`,
+      languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}`])),
     },
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,
