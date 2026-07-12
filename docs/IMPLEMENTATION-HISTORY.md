@@ -76,3 +76,33 @@ The Worker uses:
 - No KV, D1, Durable Objects, or other storage bindings
 
 OpenNext warns that native Windows builds are not fully supported. Builds have been verified locally, but WSL or Linux remains the recommended environment for Cloudflare preview and deployment.
+
+## Internationalization (next-intl)
+
+The site was localized with `next-intl`, routed through an `app/[locale]/` segment with `ru` as the default locale and `en` as the alternate. Routing config lives in `i18n/routing.ts`, request-scoped message loading in `i18n/request.ts`, and locale-aware navigation helpers in `i18n/navigation.ts`. Translated copy lives in `messages/ru.json` and `messages/en.json`.
+
+### Gotcha: Next.js 16 Proxy defaults to the Node.js runtime, which OpenNext/Cloudflare cannot run
+
+The first i18n pass used a `proxy.ts` (Next 16's rename of `middleware.ts`) built with `next-intl/middleware` to detect locale and rewrite paths. This built fine locally but failed the Cloudflare build with:
+
+```
+ERROR Node.js middleware is not currently supported. Consider switching to Edge Middleware.
+```
+
+Per `node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/proxy.md`: as of v16.0.0, **Proxy defaults to the Node.js runtime**, and the `runtime` config option is not available in Proxy files — setting it throws an error. There is no way to force a v16 Proxy file back to Edge, and OpenNext's Cloudflare adapter only supports Edge middleware. This is a hard incompatibility, not a config oversight.
+
+**Fix:** removed `proxy.ts` entirely. Switched `i18n/routing.ts`'s `localePrefix` from `"as-needed"` to `"always"`, so both `/ru` and `/en` are always explicit in the URL and no proxy-based locale detection/rewrite is needed. Added a static `app/page.tsx` that `redirect()`s `/` to `/ru` for the bare-domain case.
+
+### Gotcha: removing the proxy silently breaks locale detection server-side
+
+After removing `proxy.ts`, the language switcher UI worked (it navigates via `next-intl`'s `router.replace(pathname, { locale })`), but every page — regardless of `/ru` vs `/en` in the URL — rendered Russian content.
+
+Root cause: `next-intl`'s `getRequestConfig` (in `i18n/request.ts`) resolves `requestLocale` by reading a header (`HEADER_LOCALE_NAME`) that middleware/proxy normally sets after matching the URL. With no proxy, that header is never set, so `requestLocale` resolves to `undefined` and always falls back to `routing.defaultLocale` ("ru") — see `node_modules/next-intl/dist/esm/*/server/react-server/RequestLocale.js`.
+
+**Fix:** call `setRequestLocale(locale)` (from `next-intl/server`) using the `[locale]` route param, in both `app/[locale]/layout.tsx` and `app/[locale]/page.tsx`, before any translation calls. This is `next-intl`'s documented pattern for static rendering without middleware — it populates a per-request locale cache that `getRequestConfig` reads instead of the (now-absent) header. Because `page.tsx` needed to read `params` to do this, it became an `async` component, which in turn required switching its translation calls from the synchronous `useTranslations` hook to the async `getTranslations` (the sync hook throws if called inside an `async` Server Component).
+
+Verified by inspecting the prerendered output: `/ru` and `/en` build as two distinct static pages (`● /[locale]` with `generateStaticParams`, not a single dynamic `ƒ` route), with `<html lang="ru">` vs `<html lang="en">` and different byte sizes for the Cyrillic vs Latin copy.
+
+### Takeaway
+
+Any Server Component in the `[locale]` tree that reads translations must either be non-`async` (so the sync `useTranslations` works and inherits the request-cached locale) or call `getTranslations`/`setRequestLocale` explicitly. Don't rely on middleware/proxy for locale propagation on this deployment target — Cloudflare via OpenNext cannot run one.
