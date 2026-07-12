@@ -1,0 +1,65 @@
+{
+  "Metadata": {
+    "title": "Skyler — Web Systems Engineer",
+    "description": "Skyler is a web systems engineer working across interfaces, content systems, infrastructure, deployments, servers, and self-hosted tools.",
+    "ogLocale": "en_US"
+  },
+  "Header": {
+    "backToTop": "Skyler, back to top",
+    "skipLink": "Skip to content",
+    "nav": {
+      "things": "Things",
+      "links": "Links"
+    }
+  },
+  "Hero": {
+    "identity": "Web systems engineer working across interfaces, infrastructure, content systems, and the machinery holding them together.",
+    "titleLead": "I make websites, systems, and occasionally",
+    "titleHighlight": "problems for myself."
+  },
+  "About": {
+    "ariaLabel": "About Skyler",
+    "p1": "I build web systems from the interface down: websites, content architecture, integrations, deployments, servers, and the awkward glue between them.",
+    "p2": "Most of my professional work lives behind NDAs. What escapes usually involves Next.js, MODX, Cloudflare, Docker, Linux, self-hosting, automation, or an unreasonable amount of CSS.",
+    "note": "Lately I have been moving deeper into networking, hardware, cybersecurity, and the infrastructure underneath the web."
+  },
+  "Projects": {
+    "ariaLabel": "A few things that escaped",
+    "title": "A few things that escaped",
+    "techAriaSuffix": "technologies",
+    "items": [
+      {
+        "name": "Garnet",
+        "description": "A small self-hosted PostgreSQL backup system built around predictable daily and weekly snapshots.",
+        "tags": ["PostgreSQL", "Linux", "Automation"]
+      },
+      {
+        "name": "The home lab that kept growing",
+        "description": "A self-hosted collection of networking, monitoring, storage, media, automation, and infrastructure services that gradually became its own tiny ecosystem.",
+        "tags": ["Docker", "Cloudflare", "Tailscale", "nginx"]
+      },
+      {
+        "name": "Tools for things that should have been simple",
+        "description": "Utilities and integrations for multilingual CMS projects, deployment pipelines, metadata, search, migrations, and other jobs that started with a dangerously optimistic estimate.",
+        "tags": ["MODX", "Next.js", "TypeScript", "CMS"]
+      }
+    ]
+  },
+  "Elsewhere": {
+    "ariaLabel": "Find me elsewhere",
+    "title": "Find me elsewhere",
+    "github": "GitHub",
+    "email": "Email",
+    "x": "X",
+    "discord": "Discord",
+    "resumeDownload": "Download Résumé",
+    "resumeSoon": "Résumé soon",
+    "resumeSoonAria": "Résumé coming soon",
+    "opensNewTab": "(opens in a new tab)"
+  },
+  "LanguageSwitcher": {
+    "label": "Language",
+    "ru": "RU",
+    "en": "EN"
+  }
+}

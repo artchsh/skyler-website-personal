@@ -29,6 +29,12 @@ a { color: inherit; }
 .site-header nav a { min-height: 44px; display: inline-flex; align-items: center; color: var(--muted); font-size: .9rem; text-decoration: none; transition: color .2s ease, transform .2s ease; }
 .site-header nav a:hover, .site-header nav a:focus-visible { color: var(--foreground); transform: translateY(-1px); }
 
+.language-switcher { display: flex; gap: .25rem; margin-left: 1.5rem; padding: .25rem; border: 1px solid var(--border); }
+.language-switcher button { min-height: 32px; padding: 0 .6rem; border: 0; background: transparent; color: var(--muted); font: 600 .78rem/1 var(--font-mono); letter-spacing: .02em; cursor: pointer; transition: color .2s ease, background-color .2s ease; }
+.language-switcher button:hover:not(:disabled) { color: var(--foreground); }
+.language-switcher button.is-active { background: var(--accent); color: var(--background); cursor: default; }
+.language-switcher button:disabled { cursor: default; }
+
 .composition { display: grid; grid-template-columns: minmax(0, 1.38fr) minmax(22rem, 1fr); grid-template-areas: "hero about" "links projects"; column-gap: clamp(3rem, 6vw, 6rem); align-items: start; padding: clamp(2.5rem, 5vw, 4.5rem) 0 3.5rem; }
 .hero { grid-area: hero; max-width: 44rem; padding-right: 1rem; }
 .identity { max-width: 36rem; margin: 0 0 clamp(1.75rem, 3vw, 2.75rem); color: var(--muted); font-size: clamp(1rem, 1.35vw, 1.18rem); line-height: 1.55; }
