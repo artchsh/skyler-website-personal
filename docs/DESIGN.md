@@ -76,12 +76,12 @@ Desktop entries use two internal columns, while tablet and mobile entries stack.
 
 The homepage project list is now a compact preview of a larger bilingual portfolio. The portfolio index keeps the editorial direction while giving the two kinds of work different rhythms:
 
-- Personal random projects use a three-column visual grid.
+- Personal random projects use a two-column visual grid, with the interactive Homelab project spanning the full width as the featured entry.
 - Websites use larger alternating case-study rows with more technical context.
 
 Every entry has a dedicated static detail page. Personal projects focus on the idea, implementation, and possible next steps. Website case studies add a gallery, full stack, features, strengths, and an explicit retrospective about what could be improved. External and GitHub links remain optional and disappear entirely when no URL is configured.
 
-Sample images are flat, local SVG compositions rather than remote assets. They preserve the site's warm black, off-white, and lavender palette while clearly behaving as replaceable project media.
+Project media is repository-local. Personal work combines reviewed screenshots with authored SVG previews, while website case studies use consistent 1920×1080 captures. Screenshot presentations share a macOS-style browser frame, and personal-project cards use a consistent 8:5 media stage so mixed source dimensions do not disturb the grid.
 
 ## External links
 
@@ -114,13 +114,15 @@ Monospace is restricted to project tags. Body copy remains approximately 16–18
 
 ## Interaction and motion
 
-There are three restrained CSS interactions:
+The main restrained interactions are:
 
 - Accent phrase tracking and two-pixel shift
 - Project title underline and row shift
 - External link movement and underline
+- Locale switching that preserves the current route
+- Keyboard- and pointer-accessible Homelab topology exploration
 
-No Client Component is needed for design behavior. `prefers-reduced-motion` removes transforms and effectively disables transitions. Keyboard focus remains visible through the lavender focus outline, and link hover treatments are mirrored with `:focus-visible`.
+Most content and visual structure remain server rendered. Client Components are reserved for behavior that needs browser state: the language switcher and the interactive Homelab topology. `prefers-reduced-motion` removes transforms and effectively disables transitions. Keyboard focus remains visible through the lavender focus outline, and link hover treatments are mirrored with `:focus-visible`.
 
 ## Accessibility
 
@@ -135,7 +137,7 @@ The page retains:
 - Sufficient contrast for body and essential content
 - Touch targets of at least 44–48px for links
 - No fixed elements that can overlap content
-- Complete server-rendered content without JavaScript
+- Complete core portfolio content without JavaScript; enhanced topology exploration and locale switching require JavaScript
 
 ## Responsive targets
 

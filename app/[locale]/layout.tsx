@@ -76,7 +76,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
   setRequestLocale(locale);
 
   return (
-    <html lang={locale}>
+    <html lang={locale} data-scroll-behavior="smooth">
       <body>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>

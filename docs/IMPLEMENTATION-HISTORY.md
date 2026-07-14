@@ -111,4 +111,12 @@ Any Server Component in the `[locale]` tree that reads translations must either 
 
 The site now includes `/[locale]/portfolio` and `/[locale]/portfolio/[slug]`. Project content is stored in a typed bilingual collection in `data/portfolio.ts`; `generateStaticParams` produces every project page for both supported locales during the build.
 
-The data model separates personal projects from website case studies while keeping links optional. Website entries support galleries, feature lists, strengths, and improvement notes. Project media is repository-local, and the sitemap includes the portfolio index and all detail routes.
+The data model separates personal projects from website case studies while keeping links optional. Website entries support galleries, feature lists, strengths, and improvement notes. Project media is repository-local. Portfolio routes deliberately emit `noindex` metadata and are excluded from the sitemap; they remain publicly reachable and should not be treated as access-controlled.
+
+The current personal-project collection contains Homelab Infrastructure, Virtual Gamepad, Financial Tracker, Wedding Wishlist, and Smoke Alarm Telegram Bot. The Homelab entry is highlighted on the index and has an interactive inline-SVG architecture view backed by a static SVG preview. Website galleries use consistent 1920×1080 captures, and screenshot media shares a macOS-style browser frame.
+
+## React Doctor audit
+
+On 15 July 2026, the repository was scanned with `bunx react-doctor@latest --verbose`. Three authored-source warnings were fixed: root-page metadata was added, the language switcher stopped subscribing to a pathname used only inside its click handler, and an unused non-component export was removed from the button primitive.
+
+Four remaining warnings were traced to generated `.open-next` output rather than application source. `doctor.config.json` now ignores `.next/**` and `.open-next/**` without disabling any diagnostic rules. The final scan scored 100/100. See `FINDINGS.md` for the classifications and follow-up risks.
