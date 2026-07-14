@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Packet Garden network map</title><desc id="desc">A dark network topology interface with lavender nodes and a device inspector.</desc>
+  <rect width="1600" height="1000" fill="#171719"/><rect x="48" y="48" width="1504" height="904" fill="#111113" stroke="#3b3a40"/>
+  <text x="88" y="112" fill="#f2efea" font-family="system-ui" font-size="28" font-weight="700">packet garden</text><text x="88" y="148" fill="#938c87" font-family="monospace" font-size="14">HOME / 23 DEVICES / QUIET</text>
+  <line x1="88" y1="182" x2="1512" y2="182" stroke="#34333a"/>
+  <g stroke="#545468" stroke-width="2" fill="none"><path d="M390 485L600 330 820 470 1040 290M600 330L650 670 970 730M820 470L1180 570M390 485L300 700M1040 290L1310 360"/></g>
+  <g fill="#8b8cff"><circle cx="390" cy="485" r="22"/><circle cx="600" cy="330" r="15"/><circle cx="820" cy="470" r="30"/><circle cx="1040" cy="290" r="15"/></g>
+  <g fill="#bab3ad"><circle cx="650" cy="670" r="13"/><circle cx="970" cy="730" r="18"/><circle cx="1180" cy="570" r="12"/><circle cx="300" cy="700" r="12"/><circle cx="1310" cy="360" r="12"/></g>
+  <g fill="#f2efea" font-family="monospace" font-size="15"><text x="430" y="490">gateway</text><text x="840" y="460">atlas</text><text x="1065" y="295">studio-ap</text><text x="990" y="760">nas-01</text></g>
+  <rect x="1130" y="660" width="330" height="215" fill="#19191d" stroke="#494852"/><text x="1160" y="704" fill="#8b8cff" font-family="monospace" font-size="13">DEVICE / ATLAS</text><text x="1160" y="750" fill="#f2efea" font-family="system-ui" font-size="24" font-weight="700">Core server</text><text x="1160" y="790" fill="#bab3ad" font-family="monospace" font-size="14">10.14.10.8 · TRUSTED</text><text x="1160" y="830" fill="#938c87" font-family="monospace" font-size="14">UP 18D 04H</text>
+</svg>

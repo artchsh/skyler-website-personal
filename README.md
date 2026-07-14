@@ -69,3 +69,14 @@ Identity, site URL, email, GitHub, X, Discord, and résumé settings are configu
 Place the real résumé at `public/skyler-cv.pdf`, then set `siteConfig.cvAvailable` to `true`. Until then, the public UI shows a disabled `Résumé soon` label; `public/CV-PLACEHOLDER.md` records the expected path.
 
 The site has no database, external storage, analytics, CMS, authentication, or backend service.
+
+## Portfolio content
+
+Portfolio entries live in `data/portfolio.ts`. Each entry has bilingual copy, a tech stack, local images, and a `kind` of either `personal` or `website`.
+
+- Personal projects support implementation notes and possible next steps.
+- Website projects support multiple images, features, strengths, and improvement notes.
+- `github` and `live` links are optional. A links section is rendered only when at least one URL is configured.
+- Sample artwork lives in `public/portfolio/` and can be replaced without changing the page components when the file paths stay the same.
+
+The portfolio index is available at `/ru/portfolio` and `/en/portfolio`. Detail pages are statically generated from each project's `slug`.

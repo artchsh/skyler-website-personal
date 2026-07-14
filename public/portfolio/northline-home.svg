@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Northline Studio homepage</title><desc id="desc">An architecture portfolio homepage with a large abstract building photograph and editorial typography.</desc>
+  <rect width="1600" height="1000" fill="#d9d3c8"/><text x="58" y="75" fill="#171719" font-family="system-ui" font-size="28" font-weight="700">NORTHLINE</text><text x="1215" y="72" fill="#171719" font-family="monospace" font-size="14">PROJECTS  STUDIO  INDEX</text>
+  <rect x="58" y="120" width="1484" height="650" fill="#262429"/><path d="M58 770L540 210 870 770Z" fill="#aaa49b"/><path d="M615 770L1020 120 1370 770Z" fill="#efeae0"/><rect x="1010" y="420" width="532" height="350" fill="#88847e"/><g stroke="#333238" stroke-width="9"><path d="M1045 455v280M1110 455v280M1175 455v280M1240 455v280M1305 455v280M1370 455v280M1435 455v280"/></g><circle cx="340" cy="345" r="80" fill="#8b8cff" opacity=".9"/>
+  <text x="58" y="840" fill="#171719" font-family="Georgia,serif" font-size="52">House for a Northern Light</text><text x="58" y="890" fill="#555159" font-family="system-ui" font-size="18">Residential / Karaganda / 2025</text><text x="1370" y="878" fill="#171719" font-family="monospace" font-size="16">01 — 08</text>
+</svg>

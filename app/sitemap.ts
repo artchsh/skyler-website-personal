@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return routing.locales.map((locale) => ({
     url: new URL(`/${locale}`, siteConfig.url).toString(),
     lastModified,
-    changeFrequency: "monthly",
+    changeFrequency: "monthly" as const,
     priority: locale === routing.defaultLocale ? 1 : 0.9,
   }));
 }

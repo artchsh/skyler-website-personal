@@ -72,6 +72,17 @@ The right-column copy uses three distinct thoughts with controlled paragraph spa
 
 Desktop entries use two internal columns, while tablet and mobile entries stack. There are no cards, project numbers, outer boxes, or remote links. Hovering shifts an entry slightly and draws a restrained lavender underline under its title. Hairlines appear only between entries.
 
+## Portfolio
+
+The homepage project list is now a compact preview of a larger bilingual portfolio. The portfolio index keeps the editorial direction while giving the two kinds of work different rhythms:
+
+- Personal random projects use a three-column visual grid.
+- Websites use larger alternating case-study rows with more technical context.
+
+Every entry has a dedicated static detail page. Personal projects focus on the idea, implementation, and possible next steps. Website case studies add a gallery, full stack, features, strengths, and an explicit retrospective about what could be improved. External and GitHub links remain optional and disappear entirely when no URL is configured.
+
+Sample images are flat, local SVG compositions rather than remote assets. They preserve the site's warm black, off-white, and lavender palette while clearly behaving as replaceable project media.
+
 ## External links
 
 Links form a strong two-column text group rather than a bordered navigation grid. Configured external URLs use safe `noopener noreferrer` behavior and accessible new-tab text. Email uses `mailto:`.

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Desk Weather e-ink display</title><desc id="desc">A monochrome weather interface showing temperature, wind, daylight and a short recommendation.</desc>
+  <rect width="1600" height="1000" fill="#26252a"/><rect x="185" y="110" width="1230" height="780" rx="26" fill="#e8e5dd" stroke="#0d0d0e" stroke-width="28"/>
+  <text x="250" y="195" fill="#171719" font-family="monospace" font-size="17">TUESDAY / ALMATY / 07:42</text><line x1="250" y1="225" x2="1350" y2="225" stroke="#171719" stroke-width="3"/>
+  <text x="250" y="385" fill="#171719" font-family="system-ui" font-size="160" font-weight="700">−4°</text><circle cx="1070" cy="335" r="80" fill="none" stroke="#171719" stroke-width="15"/><path d="M970 420h230" stroke="#171719" stroke-width="15"/><path d="M1015 395q55-60 110 0" fill="#e8e5dd" stroke="#171719" stroke-width="12"/>
+  <text x="250" y="455" fill="#171719" font-family="system-ui" font-size="26">Dry morning. Wind arrives after lunch.</text>
+  <line x1="250" y1="500" x2="1350" y2="500" stroke="#171719" stroke-width="3"/><g fill="#171719" font-family="monospace"><text x="250" y="560" font-size="16">FEELS</text><text x="250" y="625" font-size="44">−9°</text><text x="520" y="560" font-size="16">WIND</text><text x="520" y="625" font-size="44">18 km/h</text><text x="860" y="560" font-size="16">LIGHT</text><text x="860" y="625" font-size="44">09h 14m</text><text x="1190" y="560" font-size="16">AIR</text><text x="1190" y="625" font-size="44">GOOD</text></g>
+  <rect x="250" y="690" width="1100" height="120" fill="#171719"/><text x="285" y="745" fill="#e8e5dd" font-family="monospace" font-size="17">TODAY'S DECISION</text><text x="285" y="790" fill="#e8e5dd" font-family="system-ui" font-size="27">Heavy layer. No umbrella. Keep the window closed.</text>
+</svg>

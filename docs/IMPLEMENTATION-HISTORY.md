@@ -106,3 +106,9 @@ Verified by inspecting the prerendered output: `/ru` and `/en` build as two dist
 ### Takeaway
 
 Any Server Component in the `[locale]` tree that reads translations must either be non-`async` (so the sync `useTranslations` works and inherits the request-cached locale) or call `getTranslations`/`setRequestLocale` explicitly. Don't rely on middleware/proxy for locale propagation on this deployment target — Cloudflare via OpenNext cannot run one.
+
+## Portfolio system
+
+The site now includes `/[locale]/portfolio` and `/[locale]/portfolio/[slug]`. Project content is stored in a typed bilingual collection in `data/portfolio.ts`; `generateStaticParams` produces every project page for both supported locales during the build.
+
+The data model separates personal projects from website case studies while keeping links optional. Website entries support galleries, feature lists, strengths, and improvement notes. Project media is repository-local, and the sitemap includes the portfolio index and all detail routes.

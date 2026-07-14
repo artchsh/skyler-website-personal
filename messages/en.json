@@ -7,7 +7,10 @@
   "Header": {
     "backToTop": "Skyler, back to top",
     "skipLink": "Skip to content",
+    "navLabel": "Primary navigation",
     "nav": {
+      "home": "Home",
+      "portfolio": "Portfolio",
       "things": "Things",
       "links": "Links"
     }
@@ -22,28 +25,6 @@
     "p1": "I build web systems from the interface down: websites, content architecture, integrations, deployments, servers, and the awkward glue between them.",
     "p2": "Most of my professional work lives behind NDAs. What escapes usually involves Next.js, MODX, Cloudflare, Docker, Linux, self-hosting, automation, or an unreasonable amount of CSS.",
     "note": "Lately I have been moving deeper into networking, hardware, cybersecurity, and the infrastructure underneath the web."
-  },
-  "Projects": {
-    "ariaLabel": "A few things that escaped",
-    "title": "A few things that escaped",
-    "techAriaSuffix": "technologies",
-    "items": [
-      {
-        "name": "Garnet",
-        "description": "A small self-hosted PostgreSQL backup system built around predictable daily and weekly snapshots.",
-        "tags": ["PostgreSQL", "Linux", "Automation"]
-      },
-      {
-        "name": "The home lab that kept growing",
-        "description": "A self-hosted collection of networking, monitoring, storage, media, automation, and infrastructure services that gradually became its own tiny ecosystem.",
-        "tags": ["Docker", "Cloudflare", "Tailscale", "nginx"]
-      },
-      {
-        "name": "Tools for things that should have been simple",
-        "description": "Utilities and integrations for multilingual CMS projects, deployment pipelines, metadata, search, migrations, and other jobs that started with a dangerously optimistic estimate.",
-        "tags": ["MODX", "Next.js", "TypeScript", "CMS"]
-      }
-    ]
   },
   "Elsewhere": {
     "ariaLabel": "Find me elsewhere",
@@ -61,5 +42,40 @@
     "label": "Language",
     "ru": "RU",
     "en": "EN"
+  },
+  "Portfolio": {
+    "eyebrow": "Selected work / engineering case studies",
+    "title": "Work with the rough edges left in.",
+    "intro": "A growing collection of production websites, systems, and unnecessary side quests. The website case studies use real work; the personal projects are sample entries until I add their final details.",
+    "personalTitle": "Personal random projects",
+    "personalIntro": "Small tools, experiments, and ideas that became real enough to keep.",
+    "websitesTitle": "Websites",
+    "websitesIntro": "Selected web work, documented beyond the final screenshot: decisions, systems, good calls, and things I would do differently.",
+    "designCredit": "UI/UX design was created by a designer colleague. These case studies document my engineering and implementation work, not visual design authorship.",
+    "projectCount": "{count, plural, one {# project} other {# projects}}",
+    "toolsCount": "{count, plural, one {# tool} other {# tools}}",
+    "viewProject": "View project",
+    "viewCaseStudy": "Open case study",
+    "allProjects": "See the full portfolio",
+    "previewTitle": "Selected work",
+    "previewIntro": "A mix of web work and personal experiments, with the decisions behind them included.",
+    "categoryPersonal": "Personal project",
+    "categoryWebsite": "Website",
+    "back": "Back to portfolio",
+    "role": "Role",
+    "year": "Year",
+    "stack": "Full stack",
+    "gallery": "Project views",
+    "features": "What the website does",
+    "wins": "What I did well",
+    "improvements": "What I would improve",
+    "notes": "Built around",
+    "nextSteps": "If I kept going",
+    "github": "Source on GitHub",
+    "live": "Visit website",
+    "optionalLinks": "Project links",
+    "nextProject": "Next project",
+    "sampleNotice": "Sample personal project — ready to replace with final project data",
+    "liveCaptureNotice": "Live website captured at 1920 × 1080 in July 2026"
   }
 }

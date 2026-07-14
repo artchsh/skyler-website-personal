@@ -1,14 +1,15 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { EscapedProjects } from "@/components/escaped-projects";
 import { ExternalLinks } from "@/components/external-links";
+import { PortfolioPreview } from "@/components/portfolio-preview";
 import { SiteHeader } from "@/components/site-header";
 import { siteConfig } from "@/data/site";
+
+const sameAs = [siteConfig.github, siteConfig.x, siteConfig.discordUrl];
 
 export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
-  const sameAs = [siteConfig.github, siteConfig.x, siteConfig.discordUrl];
   const pageUrl = new URL(`/${locale}`, siteConfig.url).toString();
   const personSchema = {
     "@type": "Person",
@@ -46,7 +47,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
                 <span aria-hidden="true">↳</span> {t("About.note")}
               </p>
           </section>
-          <EscapedProjects />
+          <PortfolioPreview />
           <ExternalLinks />
         </main>
       </div>
