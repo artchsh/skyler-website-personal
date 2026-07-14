@@ -17,6 +17,7 @@ type ProjectLink = {
 type ProjectBase = {
   slug: string;
   year: string;
+  highlighted?: boolean;
   sample?: boolean;
   title: LocalizedText;
   summary: LocalizedText;
@@ -26,6 +27,7 @@ type ProjectBase = {
   images: PortfolioImage[];
   links?: {
     github?: ProjectLink;
+    secondaryGithub?: ProjectLink;
     live?: ProjectLink;
   };
 };
@@ -45,276 +47,304 @@ export type WebsiteProject = ProjectBase & {
 
 export type PortfolioProject = PersonalProject | WebsiteProject;
 
-const portfolioDrafts: PortfolioProject[] = [
+const personalPortfolioProjects: PersonalProject[] = [
   {
-    slug: "packet-garden",
+    slug: "homelab-infrastructure",
     kind: "personal",
-    year: "2026",
-    sample: true,
-    title: { en: "Packet Garden", ru: "Packet Garden" },
+    year: "2024–2026",
+    highlighted: true,
+    title: { en: "Homelab Infrastructure", ru: "Домашняя инфраструктура" },
     summary: {
-      en: "A quiet visual map of the devices and services living on a home network.",
-      ru: "Спокойная визуальная карта устройств и сервисов, живущих в домашней сети.",
+      en: "A two-site infrastructure connecting work hardware, home services, private devices, and public traffic without opening inbound ports.",
+      ru: "Инфраструктура из двух площадок, объединяющая рабочее железо, домашние сервисы, личные устройства и публичный трафик без открытых входящих портов.",
     },
     description: {
-      en: "A weekend experiment that turns network discovery into a small, readable landscape. It groups devices by trust zone, keeps a history of what appeared and disappeared, and stays useful without becoming another monitoring dashboard.",
-      ru: "Эксперимент выходного дня, превращающий обнаружение устройств в небольшую понятную карту. Он группирует устройства по зонам доверия, хранит историю появлений и исчезновений и остаётся полезным, не превращаясь в очередной дашборд мониторинга.",
+      en: "An evolving homelab and work infrastructure built around clear trust boundaries. A Tailscale mesh connects personal devices, a Proxmox host, and a Raspberry Pi. Public requests enter through Cloudflare and travel over outbound tunnels to the appropriate service, while internal tools remain private. Proxmox runs isolated containers and VM guests; the Pi carries the smaller always-on personal services.",
+      ru: "Развивающаяся домашняя и рабочая инфраструктура с чёткими границами доверия. Tailscale mesh объединяет личные устройства, Proxmox-хост и Raspberry Pi. Публичные запросы входят через Cloudflare и идут по исходящим туннелям к нужному сервису, а внутренние инструменты остаются приватными. Proxmox запускает изолированные контейнеры и виртуальные машины, а Pi держит небольшие постоянно работающие личные сервисы.",
     },
-    role: { en: "Concept, interface, and implementation", ru: "Концепция, интерфейс и разработка" },
-    techStack: ["Go", "SQLite", "mDNS", "SNMP", "WebSockets", "CSS"],
+    role: {
+      en: "Infrastructure architecture, deployment, and operations",
+      ru: "Архитектура инфраструктуры, деплой и эксплуатация",
+    },
+    techStack: [
+      "Proxmox VE",
+      "LXC",
+      "Virtual machines",
+      "Tailscale",
+      "Cloudflare Tunnel",
+      "Raspberry Pi 5",
+      "n8n",
+      "Vaultwarden",
+      "Home Assistant",
+    ],
     images: [
       {
-        src: "/portfolio/packet-garden.svg",
-        alt: { en: "Packet Garden network map interface", ru: "Интерфейс карты сети Packet Garden" },
+        src: "/portfolio/personal/homelab/architecture.svg",
+        alt: {
+          en: "Logical map of the homelab and work infrastructure",
+          ru: "Логическая схема домашней и рабочей инфраструктуры",
+        },
       },
     ],
     notes: [
       {
-        en: "Passive discovery first, with active probes used only when they add useful context.",
-        ru: "Сначала пассивное обнаружение, активные проверки — только когда они добавляют полезный контекст.",
+        en: "Public services use outbound Cloudflare tunnels, so the network does not need publicly exposed inbound ports.",
+        ru: "Публичные сервисы используют исходящие Cloudflare-туннели, поэтому сети не нужны открытые входящие порты.",
       },
       {
-        en: "A deliberately small event model makes device history easy to inspect and export.",
-        ru: "Намеренно небольшая модель событий упрощает просмотр и экспорт истории устройств.",
+        en: "Tailscale provides one private access plane across work hardware, personal computers, laptops, and the Pi.",
+        ru: "Tailscale создаёт единый приватный контур доступа для рабочего железа, личных компьютеров, ноутбуков и Pi.",
       },
       {
-        en: "The map is keyboard-navigable and remains legible on a phone beside a network rack.",
-        ru: "Карта доступна с клавиатуры и остаётся читаемой на телефоне рядом с сетевой стойкой.",
+        en: "Work-hosted and personal traffic use distinct service paths while still sharing a legible operating model.",
+        ru: "Рабочий и личный трафик используют разные пути к сервисам, сохраняя при этом единую понятную эксплуатационную модель.",
       },
     ],
     nextSteps: [
       {
-        en: "Add better vendor fingerprinting without sending local network data to a third party.",
-        ru: "Улучшить определение производителей, не отправляя данные локальной сети третьим сторонам.",
+        en: "Add one observability layer for service health, tunnel state, storage, and backup freshness.",
+        ru: "Добавить единый слой наблюдаемости за сервисами, туннелями, хранилищем и актуальностью бэкапов.",
       },
       {
-        en: "Build a calmer alert model for meaningful topology changes.",
-        ru: "Создать более спокойную модель уведомлений о значимых изменениях топологии.",
+        en: "Move more of the repeatable setup into versioned infrastructure-as-code and documented recovery drills.",
+        ru: "Перенести повторяемую настройку в версионируемый infrastructure-as-code и документированные сценарии восстановления.",
       },
     ],
   },
   {
-    slug: "midnight-archive",
+    slug: "virtual-gamepad",
     kind: "personal",
     year: "2025",
-    sample: true,
-    title: { en: "Midnight Archive", ru: "Midnight Archive" },
+    title: { en: "Virtual Gamepad", ru: "Virtual Gamepad" },
     summary: {
-      en: "A self-hosted reading archive for pages that may not be online tomorrow.",
-      ru: "Self-hosted архив для материалов, которых завтра может уже не быть в сети.",
+      en: "An iPhone becomes a low-latency Xbox controller for a Windows PC over the local network.",
+      ru: "iPhone превращается в Xbox-контроллер для Windows с низкой задержкой через локальную сеть.",
     },
     description: {
-      en: "A local-first bookmark and capture service for long-form reading. It stores a faithful snapshot, extracts a clean text version, and makes the collection searchable without turning it into a public social product.",
-      ru: "Локальный сервис закладок и сохранения длинных материалов. Он хранит точный снимок страницы, извлекает чистую текстовую версию и делает коллекцию доступной для поиска, не превращая её в публичный социальный продукт.",
+      en: "A two-part experiment: a landscape SwiftUI controller with touch controls and haptic feedback, plus a small Windows server that translates WebSocket messages into XInput events. The server is also distributed as an executable so the setup does not require a Python environment.",
+      ru: "Эксперимент из двух частей: landscape-контроллер на SwiftUI с сенсорным управлением и тактильной отдачей, а также небольшой Windows-сервер, переводящий WebSocket-сообщения в события XInput. Сервер распространяется и как готовый executable, поэтому для запуска не нужен Python.",
     },
-    role: { en: "Product design and full-stack development", ru: "Продуктовый дизайн и full-stack разработка" },
-    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Playwright", "Meilisearch", "Docker"],
+    role: { en: "iOS client and Windows server development", ru: "Разработка iOS-клиента и Windows-сервера" },
+    techStack: ["Swift", "SwiftUI", "Starscream", "WebSockets", "Python", "FastAPI", "vgamepad", "ViGEm"],
     images: [
       {
-        src: "/portfolio/midnight-archive.svg",
-        alt: { en: "Midnight Archive reading library", ru: "Библиотека чтения Midnight Archive" },
+        src: "/portfolio/personal/virtual-gamepad/controller.svg",
+        alt: { en: "Virtual Gamepad landscape controller interface", ru: "Landscape-интерфейс контроллера Virtual Gamepad" },
+      },
+      {
+        src: "/portfolio/personal/virtual-gamepad/settings.svg",
+        alt: { en: "Virtual Gamepad connection settings", ru: "Настройки подключения Virtual Gamepad" },
       },
     ],
     notes: [
       {
-        en: "Original snapshots and extracted text are stored separately so either can be replaced safely.",
-        ru: "Оригинальные снимки и извлечённый текст хранятся отдельно, поэтому каждый слой можно безопасно заменить.",
+        en: "The client covers standard Xbox 360 inputs, twin analogue sticks, triggers, shoulder buttons, and a D-pad.",
+        ru: "Клиент поддерживает стандартные элементы Xbox 360: два аналоговых стика, триггеры, бамперы и D-pad.",
       },
       {
-        en: "Search favors titles, authors, and personal notes over noisy page chrome.",
-        ru: "Поиск отдаёт приоритет заголовкам, авторам и личным заметкам, а не шуму интерфейса страницы.",
+        en: "Touch gestures are translated to compact real-time commands and sent to a configurable local server.",
+        ru: "Сенсорные жесты превращаются в компактные команды реального времени и отправляются на настраиваемый локальный сервер.",
+      },
+      {
+        en: "Haptics, connection state, and press animations make a glass touchscreen easier to use without looking down.",
+        ru: "Тактильная отдача, статус подключения и анимации нажатий помогают пользоваться стеклянным экраном, не глядя на него постоянно.",
       },
     ],
     nextSteps: [
       {
-        en: "Improve capture reliability for highly interactive and authenticated pages.",
-        ru: "Повысить надёжность сохранения интерактивных страниц и материалов за авторизацией.",
+        en: "Add automatic server discovery and more resilient reconnection when the phone changes networks.",
+        ru: "Добавить автоматический поиск сервера и более устойчивое переподключение при смене сети на телефоне.",
       },
       {
-        en: "Add portable annotations that survive reprocessing.",
-        ru: "Добавить переносимые аннотации, сохраняющиеся после повторной обработки материала.",
+        en: "Make control placement configurable for different hand sizes and iPhone dimensions.",
+        ru: "Сделать расположение элементов настраиваемым под разные размеры рук и моделей iPhone.",
       },
     ],
+    links: {
+      github: {
+        label: { en: "iOS client on GitHub", ru: "iOS-клиент на GitHub" },
+        href: "https://github.com/artchsh/remote-ios-controller-app",
+      },
+      secondaryGithub: {
+        label: { en: "Windows server on GitHub", ru: "Windows-сервер на GitHub" },
+        href: "https://github.com/artchsh/remote-ios-controller-server",
+      },
+    },
   },
   {
-    slug: "desk-weather",
+    slug: "financial-tracker",
     kind: "personal",
-    year: "2024",
-    sample: true,
-    title: { en: "Desk Weather", ru: "Desk Weather" },
+    year: "2025–2026",
+    title: { en: "Financial Tracker", ru: "Financial Tracker" },
     summary: {
-      en: "An e-ink forecast that only shows the weather decisions worth making.",
-      ru: "E-ink прогноз, показывающий только те погодные решения, которые действительно нужно принять.",
+      en: "A mobile-only, local-first budget tracker built first as a PWA and then explored as a native app.",
+      ru: "Мобильный local-first трекер бюджета: сначала PWA, затем отдельная нативная версия.",
     },
     description: {
-      en: "A low-power desk display that turns several forecast sources into a simple morning brief: layers, umbrella, wind, daylight, and whether opening the window is a good idea.",
-      ru: "Энергоэффективный настольный экран, превращающий несколько источников прогноза в короткую утреннюю сводку: одежда, зонт, ветер, световой день и стоит ли открывать окно.",
+      en: "A personal budgeting tool designed for a phone rather than a compressed desktop dashboard. The PWA stores everything in IndexedDB, works offline, tracks monthly limits and categories, and supports portable JSON backups. I later carried the same product into an Expo and React Native codebase to explore native navigation, haptics, and local storage.",
+      ru: "Персональный инструмент для бюджета, спроектированный именно для телефона, а не как сжатый desktop-дашборд. PWA хранит всё в IndexedDB, работает офлайн, ведёт месячные лимиты и категории и поддерживает переносимые JSON-бэкапы. Позже я перенёс продукт в Expo и React Native, чтобы исследовать нативную навигацию, haptics и локальное хранение.",
     },
-    role: { en: "Hardware, data pipeline, and visual system", ru: "Железо, пайплайн данных и визуальная система" },
-    techStack: ["ESP32", "MicroPython", "E-ink", "Open-Meteo", "MQTT"],
+    role: { en: "Product design and web/native implementation", ru: "Продуктовый дизайн и web/native разработка" },
+    techStack: ["React 19", "TypeScript", "Bun", "IndexedDB", "Service Worker", "PWA", "Expo", "React Native", "Zustand"],
     images: [
       {
-        src: "/portfolio/desk-weather.svg",
-        alt: { en: "Desk Weather e-ink forecast layout", ru: "Макет e-ink прогноза Desk Weather" },
+        src: "/portfolio/personal/financial-tracker/pwa-budget.png",
+        alt: { en: "Financial Tracker mobile budget overview with sample data", ru: "Мобильный обзор бюджета Financial Tracker с демонстрационными данными" },
+      },
+      {
+        src: "/portfolio/personal/financial-tracker/pwa-history.png",
+        alt: { en: "Financial Tracker monthly budget history", ru: "История месячных бюджетов в Financial Tracker" },
+      },
+      {
+        src: "/portfolio/personal/financial-tracker/pwa-settings.png",
+        alt: { en: "Financial Tracker settings and local data controls", ru: "Настройки и управление локальными данными Financial Tracker" },
       },
     ],
     notes: [
       {
-        en: "The display renders from a tiny semantic weather model rather than raw forecast fields.",
-        ru: "Экран строится из небольшой семантической модели погоды, а не из сырых полей прогноза.",
+        en: "All financial data stays on the device; the app has no account system or remote database.",
+        ru: "Все финансовые данные остаются на устройстве: в приложении нет аккаунтов и удалённой базы данных.",
       },
       {
-        en: "It degrades gracefully when one provider or the home network is unavailable.",
-        ru: "Устройство продолжает быть полезным, когда один из провайдеров или домашняя сеть недоступны.",
+        en: "Monthly limits, allocations, spending, remaining money, and overspending warnings update together.",
+        ru: "Месячные лимиты, распределение, траты, остаток и предупреждения о перерасходе обновляются согласованно.",
+      },
+      {
+        en: "The same product model now exists in a separate Expo/React Native implementation, not just a responsive web wrapper.",
+        ru: "Та же продуктовая модель существует в отдельной реализации на Expo/React Native, а не только в адаптивной web-обёртке.",
       },
     ],
     nextSteps: [
       {
-        en: "Tune the recommendation rules across more seasons and travel locations.",
-        ru: "Настроить правила рекомендаций для разных сезонов и поездок.",
+        en: "Bring the web and native versions to feature parity with a shared, versioned data format.",
+        ru: "Довести web- и native-версии до функционального паритета с общим версионируемым форматом данных.",
+      },
+      {
+        en: "Offer optional encrypted sync without making an account mandatory for local use.",
+        ru: "Добавить опциональную зашифрованную синхронизацию, не делая аккаунт обязательным для локального использования.",
       },
     ],
+    links: {
+      github: {
+        label: { en: "PWA source on GitHub", ru: "Исходный код PWA на GitHub" },
+        href: "https://github.com/artchsh/financial-tracker",
+      },
+      secondaryGithub: {
+        label: { en: "Native app on GitHub", ru: "Нативное приложение на GitHub" },
+        href: "https://github.com/artchsh/financial-tracker-native",
+      },
+      live: {
+        label: { en: "Open the mobile PWA", ru: "Открыть мобильную PWA" },
+        href: "https://financial-tracker-october-skyler.vercel.app/",
+      },
+    },
   },
   {
-    slug: "northline-studio",
-    kind: "website",
+    slug: "wedding-wishlist",
+    kind: "personal",
     year: "2026",
-    title: { en: "Northline Studio", ru: "Northline Studio" },
+    title: { en: "Wedding Wishlist", ru: "Wedding Wishlist" },
     summary: {
-      en: "A portfolio that lets an architecture practice explain the thinking behind the photographs.",
-      ru: "Портфолио архитектурного бюро, объясняющее идеи, стоящие за фотографиями.",
+      en: "A private-by-convention gift registry where guests can reserve presents without creating accounts.",
+      ru: "Список свадебных подарков, где гости могут бронировать вещи без регистрации аккаунта.",
     },
     description: {
-      en: "A bilingual editorial site for a fictional architecture practice. The main challenge was balancing cinematic project photography with dense technical context, then giving a small team a CMS they could use without a publishing manual.",
-      ru: "Двуязычный редакционный сайт вымышленного архитектурного бюро. Главной задачей было сбалансировать кинематографичные фотографии проектов с плотным техническим контекстом и дать небольшой команде CMS, не требующую инструкции по публикации.",
+      en: "A deliberately informal wedding registry built for real guests and a real deadline. Visitors enter a memorable name, reserve or release gifts, or choose a cash contribution. A protected admin workflow handles products, categories, ordering, images, imports, and backups without exposing those controls to guests.",
+      ru: "Намеренно неформальный свадебный wishlist, сделанный для реальных гостей и реального дедлайна. Посетители вводят запоминаемое имя, бронируют или освобождают подарки либо выбирают денежный вариант. Защищённая admin-часть управляет товарами, категориями, порядком, изображениями, импортом и бэкапами, не показывая эти инструменты гостям.",
     },
-    role: { en: "Technical direction, frontend, CMS architecture", ru: "Техническое руководство, frontend и архитектура CMS" },
-    techStack: ["Next.js", "TypeScript", "Sanity", "GROQ", "Cloudflare", "PostgreSQL", "Mapbox", "Storybook", "Playwright"],
+    role: { en: "Product design and full-stack implementation", ru: "Продуктовый дизайн и full-stack разработка" },
+    techStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "Cloudflare Workers", "OpenNext", "R2", "Edge caching"],
     images: [
       {
-        src: "/portfolio/northline-home.svg",
-        alt: { en: "Northline Studio project-led homepage", ru: "Главная страница Northline Studio с акцентом на проекты" },
+        src: "/portfolio/personal/wedding-wishlist/home.png",
+        alt: { en: "Wedding Wishlist guest landing page and gift cards", ru: "Гостевая страница Wedding Wishlist с карточками подарков" },
       },
       {
-        src: "/portfolio/northline-case.svg",
-        alt: { en: "Northline Studio architecture case study", ru: "Страница архитектурного проекта Northline Studio" },
-      },
-    ],
-    features: [
-      {
-        en: "Project stories that mix photography, plans, materials, and short editorial annotations.",
-        ru: "Истории проектов, объединяющие фотографии, планы, материалы и короткие редакционные комментарии.",
-      },
-      {
-        en: "A shared bilingual content model with explicit translation status and graceful fallbacks.",
-        ru: "Единая двуязычная контентная модель с явным статусом перевода и аккуратными fallback-состояниями.",
-      },
-      {
-        en: "Automatic image focal points, responsive art direction, and low-quality placeholders.",
-        ru: "Автоматические точки фокуса изображений, адаптивное кадрирование и облегчённые плейсхолдеры.",
-      },
-      {
-        en: "Location, typology, material, and completion-year indexes generated from the same project data.",
-        ru: "Индексы по локации, типологии, материалу и году завершения, собранные из одних данных проекта.",
+        src: "/portfolio/personal/wedding-wishlist/gifts.png",
+        alt: { en: "Wedding Wishlist category and reservation states", ru: "Категория и статусы бронирования в Wedding Wishlist" },
       },
     ],
-    wins: [
+    notes: [
       {
-        en: "The media pipeline protects visual quality without asking editors to understand responsive images.",
-        ru: "Медиапайплайн сохраняет качество изображения, не заставляя редакторов разбираться в responsive images.",
+        en: "The guest flow needs only a name: no email, password, or account setup stands between a person and a reservation.",
+        ru: "Гостю достаточно имени: между человеком и бронированием нет email, пароля или настройки аккаунта.",
       },
       {
-        en: "The content model mirrors how the studio discusses work internally, so publishing feels natural.",
-        ru: "Контентная модель повторяет внутренний язык бюро, поэтому публикация ощущается естественно.",
+        en: "Reservation states are visible immediately, while the admin side keeps editing and recovery tools separate.",
+        ru: "Статусы бронирования видны сразу, а admin-часть отдельно хранит инструменты редактирования и восстановления.",
       },
       {
-        en: "Project pages remain readable with JavaScript disabled and on slower site connections.",
-        ru: "Страницы проектов остаются читаемыми без JavaScript и при медленном соединении.",
+        en: "Product importing, object storage, edge caching, and automated JSON backups reduce maintenance around a one-off event.",
+        ru: "Импорт товаров, object storage, edge-кэширование и автоматические JSON-бэкапы уменьшают объём ручной поддержки одноразового события.",
       },
     ],
-    improvements: [
+    nextSteps: [
       {
-        en: "I would prototype the archive filters with real editors earlier; the first taxonomy was too clever.",
-        ru: "Я бы раньше протестировал фильтры архива с реальными редакторами: первая таксономия получилась слишком умной.",
+        en: "Improve image fallbacks and make keyboard focus more obvious across every card action.",
+        ru: "Улучшить fallback-состояния изображений и сделать keyboard focus заметнее во всех действиях карточек.",
       },
       {
-        en: "The map view deserves a more useful small-screen alternative than a reduced desktop map.",
-        ru: "Для карты нужна более полезная мобильная альтернатива, а не просто уменьшенная desktop-версия.",
+        en: "Add a lightweight reservation token so guests can recover their own choices without relying on a remembered name.",
+        ru: "Добавить лёгкий токен бронирования, чтобы гости могли восстановить свой выбор, не полагаясь только на запомненное имя.",
       },
     ],
   },
   {
-    slug: "field-notes-archive",
-    kind: "website",
-    year: "2025",
-    title: { en: "Field Notes Archive", ru: "Field Notes Archive" },
+    slug: "smoke-alarm-telegram-bot",
+    kind: "personal",
+    year: "2025–2026",
+    title: { en: "Smoke Alarm Telegram Bot", ru: "Smoke Alarm Telegram Bot" },
     summary: {
-      en: "A research library built to make fifteen years of scattered knowledge usable again.",
-      ru: "Исследовательская библиотека, возвращающая к жизни пятнадцать лет разрозненных знаний.",
+      en: "A playful Telegram bot that turns a group smoke break into a tiny shared ritual.",
+      ru: "Весёлый Telegram-бот, превращающий групповой перекур в небольшой общий ритуал.",
     },
     description: {
-      en: "A content-heavy archive for a fictional environmental research collective. The work combined a legacy migration, a new publishing workflow, faceted search, and a reading experience that respects long technical documents.",
-      ru: "Контентный архив для вымышленной группы экологических исследователей. Работа объединила миграцию старой системы, новый процесс публикации, фасетный поиск и интерфейс чтения длинных технических документов.",
+      en: "A group bot made for fun and then expanded into a surprisingly complete little social tool. A smoke call mentions the squad with a randomized message, adds the caller automatically, lets others join or change their mind with an inline button, and includes current Almaty weather. It also keeps history, leaderboards, opt-in state, and workday weather subscriptions.",
+      ru: "Групповой бот, сделанный ради шутки и постепенно выросший в довольно полноценный социальный инструмент. Вызов на перекур упоминает компанию случайным сообщением, автоматически добавляет автора, позволяет присоединиться или передумать через inline-кнопку и показывает текущую погоду в Алматы. Бот также хранит историю, статистику, opt-in статус и подписки на прогноз по рабочим дням.",
     },
-    role: { en: "Information architecture, migration, and full-stack delivery", ru: "Информационная архитектура, миграция и full-stack разработка" },
-    techStack: ["Next.js", "React", "Directus", "PostgreSQL", "OpenSearch", "S3", "Docker", "GitHub Actions", "Cloudflare Workers"],
+    role: { en: "Concept, bot development, and deployment", ru: "Концепция, разработка и деплой бота" },
+    techStack: ["Python", "Telegram Bot API", "SQLite", "Open-Meteo API", "Docker", "Docker Compose", "uv"],
     images: [
       {
-        src: "/portfolio/field-notes-index.svg",
-        alt: { en: "Field Notes Archive searchable index", ru: "Поисковый индекс Field Notes Archive" },
-      },
-      {
-        src: "/portfolio/field-notes-article.svg",
-        alt: { en: "Field Notes Archive long-form article", ru: "Длинный материал в Field Notes Archive" },
+        src: "/portfolio/personal/smoke-alarm/smoke-call.png",
+        alt: { en: "Smoke Alarm bot call with participants, weather, and join button", ru: "Вызов Smoke Alarm с участниками, погодой и кнопкой присоединения" },
       },
     ],
-    features: [
+    notes: [
       {
-        en: "Faceted search across region, habitat, method, author, and publication type.",
-        ru: "Фасетный поиск по региону, среде, методу, автору и типу публикации.",
+        en: "Inline participation updates the original message, so the group can see who is going without a thread of replies.",
+        ru: "Inline-участие обновляет исходное сообщение, поэтому группе видно, кто идёт, без цепочки ответов.",
       },
       {
-        en: "Document relationships that connect field reports, datasets, species, and later corrections.",
-        ru: "Связи между полевыми отчётами, датасетами, видами и последующими исправлениями.",
+        en: "SQLite persists users, opt-in state, calls, participation, and statistics across restarts.",
+        ru: "SQLite хранит пользователей, opt-in статус, вызовы, участие и статистику между перезапусками.",
       },
       {
-        en: "A resumable migration pipeline with validation reports for non-technical reviewers.",
-        ru: "Возобновляемый пайплайн миграции с понятными отчётами проверки для нетехнических специалистов.",
-      },
-      {
-        en: "Print-friendly reading views and durable citation URLs for every document section.",
-        ru: "Версии для печати и устойчивые ссылки для цитирования каждого раздела документа.",
+        en: "Randomized Russian copy and real weather make a repetitive utility feel specific to the group using it.",
+        ru: "Случайные русские сообщения и реальная погода делают повторяющуюся утилиту живой и узнаваемой для своей компании.",
       },
     ],
-    wins: [
+    nextSteps: [
       {
-        en: "The migration was treated as a product with previews and review queues, not as a one-off script.",
-        ru: "Миграция была сделана как продукт с предпросмотром и очередями проверки, а не как одноразовый скрипт.",
+        en: "Add stronger concurrency handling when several smoke calls or button presses happen together.",
+        ru: "Усилить обработку конкурентных событий, когда одновременно происходят несколько вызовов или нажатий.",
       },
       {
-        en: "Search communicates why each result matched, making a complex archive easier to trust.",
-        ru: "Поиск объясняет причину совпадения каждого результата, поэтому сложному архиву легче доверять.",
-      },
-      {
-        en: "The article template handles tables, figures, citations, and marginal notes without becoming fragile.",
-        ru: "Шаблон материала выдерживает таблицы, иллюстрации, цитаты и заметки на полях, не становясь хрупким.",
+        en: "Cover command, callback, migration, and scheduled-notification flows with automated tests.",
+        ru: "Покрыть автоматическими тестами команды, callbacks, миграции и запланированные уведомления.",
       },
     ],
-    improvements: [
-      {
-        en: "The initial indexing strategy duplicated too much CMS data; a smaller search document would be easier to evolve.",
-        ru: "Первая стратегия индексации дублировала слишком много данных CMS; компактный поисковый документ было бы легче развивать.",
+    links: {
+      github: {
+        label: { en: "Bot source on GitHub", ru: "Исходный код бота на GitHub" },
+        href: "https://github.com/artchsh/smoke-alarm-telegram-bot",
       },
-      {
-        en: "I would budget accessibility testing with domain experts for the densest charts and scientific notation.",
-        ru: "Я бы заранее заложил тестирование доступности сложных графиков и научной нотации с профильными экспертами.",
-      },
-    ],
+    },
   },
 ];
 
 export const portfolioProjects: PortfolioProject[] = [
-  ...portfolioDrafts.filter((project) => project.kind === "personal"),
+  ...personalPortfolioProjects,
   ...workPortfolioProjects,
 ];
 

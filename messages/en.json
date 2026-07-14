@@ -55,6 +55,7 @@
     "projectCount": "{count, plural, one {# project} other {# projects}}",
     "toolsCount": "{count, plural, one {# tool} other {# tools}}",
     "viewProject": "View project",
+    "highlightedProject": "Featured infrastructure project",
     "viewCaseStudy": "Open case study",
     "allProjects": "See the full portfolio",
     "previewTitle": "Selected work",
@@ -75,7 +76,7 @@
     "live": "Visit website",
     "optionalLinks": "Project links",
     "nextProject": "Next project",
-    "sampleNotice": "Sample personal project — ready to replace with final project data",
+    "personalCaptureNotice": "Project interface — live capture or reconstruction from the working implementation",
     "liveCaptureNotice": "Live website captured at 1920 × 1080 in July 2026"
   }
 }

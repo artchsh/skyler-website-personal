@@ -55,6 +55,7 @@
     "projectCount": "{count, plural, one {# проект} few {# проекта} many {# проектов} other {# проекта}}",
     "toolsCount": "{count, plural, one {# инструмент} few {# инструмента} many {# инструментов} other {# инструмента}}",
     "viewProject": "Смотреть проект",
+    "highlightedProject": "Избранный инфраструктурный проект",
     "viewCaseStudy": "Открыть кейс",
     "allProjects": "Смотреть всё портфолио",
     "previewTitle": "Избранные работы",
@@ -75,7 +76,7 @@
     "live": "Открыть сайт",
     "optionalLinks": "Ссылки проекта",
     "nextProject": "Следующий проект",
-    "sampleNotice": "Пример личного проекта — готов к замене финальными данными",
+    "personalCaptureNotice": "Интерфейс проекта — live-capture или реконструкция по рабочей реализации",
     "liveCaptureNotice": "Работающий сайт снят в разрешении 1920 × 1080 в июле 2026 года"
   }
 }

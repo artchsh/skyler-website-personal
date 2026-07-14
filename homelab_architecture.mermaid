@@ -1,0 +1,50 @@
+flowchart TD
+    Visitor([Public visitor])
+    Domain[Domain]
+    CFProxy[Cloudflare proxy]
+    CFEdge{{Cloudflare edge}}
+
+    Visitor --> Domain --> CFProxy --> CFEdge
+
+    subgraph Tailscale["Tailscale mesh"]
+        direction LR
+        WorkProxmox[Work Proxmox]
+        WorkPC[Work PC]
+        Macbook[Macbook]
+        Laptop[Laptop]
+        HomePC[Home PC]
+        Pi[Raspberry Pi 5]
+    end
+
+    subgraph WorkServices["Work server - hosted services"]
+        CTn8n[CT - n8n]
+        CTVault[CT - Vaultwarden]
+        CTStage[CT - Cloudflare stage]
+        VMs[VM guests: Windows 10, Ubuntu]
+    end
+
+    subgraph HomeServices["Home Pi - hosted services"]
+        Homen8n[n8n]
+        HomeVault[Vaultwarden]
+        HA[Home Assistant]
+        MC[Minecraft server]
+    end
+
+    WorkProxmox --> CTn8n
+    WorkProxmox --> CTVault
+    WorkProxmox --> CTStage
+    WorkProxmox -.->|"Proxmox panel only, no external access"| VMs
+
+    Pi --> Homen8n
+    Pi --> HomeVault
+    Pi --> HA
+    Pi --> MC
+
+    WorkProxmox -- "outbound tunnel connection" --> CFEdge
+    Pi -- "outbound tunnel connection (personal acct)" --> CFEdge
+
+    CFEdge == "public request traffic" ==> CTStage
+    WorkPC -. "internal access, user/pass" .-> CTn8n
+    WorkPC -. "internal access, user/pass" .-> CTVault
+
+    CFEdge -. "request traffic, personal" .-> Pi

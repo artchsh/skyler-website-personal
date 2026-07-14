@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { BrowserFrame } from "@/components/browser-frame";
+import { HomelabArchitecture } from "@/components/homelab-architecture";
 import { SiteHeader } from "@/components/site-header";
 import {
   getPortfolioProject,
@@ -12,8 +14,6 @@ import {
 import { siteConfig } from "@/data/site";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
-
-export const dynamicParams = false;
 
 export function generateStaticParams() {
   return portfolioProjects.map((project) => ({ slug: project.slug }));
@@ -58,8 +58,8 @@ export async function generateMetadata({
       siteName: siteConfig.name,
       images: [{
         url: project.images[0].src,
-        width: project.sample ? 1600 : 1920,
-        height: project.sample ? 1000 : 1080,
+        width: project.kind === "website" ? 1920 : 1600,
+        height: project.kind === "website" ? 1080 : 1000,
         alt: project.images[0].alt,
       }],
     },
@@ -106,16 +106,32 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/portf
         )}
 
         <figure className="project-lead-image">
-          <Image
-            src={project.images[0].src}
-            alt={project.images[0].alt}
-            width={project.sample ? 1600 : 1920}
-            height={project.sample ? 1000 : 1080}
-            priority
-            sizes="(max-width: 800px) calc(100vw - 40px), 1248px"
-          />
+          {project.kind === "website" ? (
+            <BrowserFrame title={project.title} url={project.links?.live?.href}>
+              <Image
+                src={project.images[0].src}
+                alt={project.images[0].alt}
+                width={1920}
+                height={1080}
+                priority
+                sizes="(max-width: 800px) calc(100vw - 40px), 1248px"
+              />
+            </BrowserFrame>
+          ) : project.slug === "homelab-infrastructure" ? (
+            <HomelabArchitecture locale={locale as PortfolioLocale} />
+          ) : (
+            <div className="personal-media-stage">
+              <Image
+                src={project.images[0].src}
+                alt={project.images[0].alt}
+                fill
+                priority
+                sizes="(max-width: 800px) calc(100vw - 40px), 1248px"
+              />
+            </div>
+          )}
           <figcaption>
-            {project.sample ? t("sampleNotice") : t("liveCaptureNotice")}
+            {project.kind === "website" ? t("liveCaptureNotice") : t("personalCaptureNotice")}
           </figcaption>
         </figure>
 
@@ -176,7 +192,15 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/portf
             <h2 id="gallery-title">{t("gallery")}</h2>
             <div>
               {project.images.slice(1).map((image) => (
-                <Image key={image.src} src={image.src} alt={image.alt} width={project.sample ? 1600 : 1920} height={project.sample ? 1000 : 1080} sizes="(max-width: 800px) calc(100vw - 40px), 1248px" />
+                project.kind === "website" ? (
+                  <BrowserFrame key={image.src} title={project.title} url={project.links?.live?.href}>
+                    <Image src={image.src} alt={image.alt} width={1920} height={1080} sizes="(max-width: 800px) calc(100vw - 40px), 1248px" />
+                  </BrowserFrame>
+                ) : (
+                  <div className="personal-media-stage" key={image.src}>
+                    <Image src={image.src} alt={image.alt} fill sizes="(max-width: 800px) calc(100vw - 40px), 1248px" />
+                  </div>
+                )
               ))}
             </div>
           </section>

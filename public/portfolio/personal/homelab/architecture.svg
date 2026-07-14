@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Homelab infrastructure map</title>
+  <desc id="desc">A logical map with Cloudflare at the public edge, a private Tailscale mesh, Proxmox work services, and Raspberry Pi home services.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#17171d"/><stop offset="1" stop-color="#0c0c0f"/></linearGradient>
+    <linearGradient id="zone" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#202029"/><stop offset="1" stop-color="#141419"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="1420" cy="90" r="260" fill="#8b8cff" opacity=".055"/>
+  <text x="90" y="84" fill="#8b8cff" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="22" letter-spacing="4">HOMELAB / LOGICAL TOPOLOGY</text>
+  <text x="90" y="132" fill="#f2efea" font-family="ui-sans-serif,system-ui,sans-serif" font-size="42" font-weight="750">Public at the edge. Private by default.</text>
+
+  <g fill="none" stroke-linecap="round">
+    <path d="M180 230H380H580" stroke="#f0c54b" stroke-width="5" stroke-dasharray="12 11"/>
+    <path d="M646 246C646 560 570 530 570 720" stroke="#8b8cff" stroke-width="5" stroke-dasharray="12 11"/>
+    <path d="M646 246C646 315 1170 300 1170 405" stroke="#8b8cff" stroke-width="5" stroke-dasharray="12 11"/>
+    <path d="M160 450H1410" stroke="#5ac9b2" stroke-width="4" stroke-dasharray="5 10"/>
+  </g>
+  <g fill="#f0c54b" filter="url(#glow)"><circle cx="280" cy="230" r="6"/><circle cx="480" cy="230" r="6"/></g>
+
+  <rect x="70" y="330" width="1460" height="230" rx="28" fill="url(#zone)" stroke="#5ac9b2" stroke-opacity=".35"/>
+  <text x="100" y="370" fill="#5ac9b2" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="19" letter-spacing="3">TAILSCALE MESH / PRIVATE ACCESS</text>
+  <rect x="70" y="625" width="700" height="290" rx="28" fill="url(#zone)" stroke="#f2efea" stroke-opacity=".12"/>
+  <text x="100" y="670" fill="#a6a5ae" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="19" letter-spacing="3">WORK SERVER / PROXMOX</text>
+  <rect x="830" y="625" width="700" height="290" rx="28" fill="url(#zone)" stroke="#f2efea" stroke-opacity=".12"/>
+  <text x="860" y="670" fill="#a6a5ae" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="19" letter-spacing="3">HOME PI / ALWAYS ON</text>
+
+  <g font-family="ui-sans-serif,system-ui,sans-serif">
+    <g transform="translate(100 188)"><rect width="160" height="84" rx="18" fill="#25252d" stroke="#f0c54b"/><circle cx="34" cy="32" r="16" fill="#f0c54b"/><text x="34" y="38" text-anchor="middle" fill="#121216" font-size="12" font-weight="800">WWW</text><text x="20" y="66" fill="#f2efea" font-size="18">Public visitor</text></g>
+    <g transform="translate(300 188)"><rect width="160" height="84" rx="18" fill="#25252d" stroke="#f0c54b"/><circle cx="34" cy="32" r="16" fill="#f0c54b"/><text x="34" y="38" text-anchor="middle" fill="#121216" font-size="12" font-weight="800">DNS</text><text x="20" y="66" fill="#f2efea" font-size="18">Domain</text></g>
+    <g transform="translate(500 188)"><rect width="190" height="84" rx="18" fill="#2d2d39" stroke="#8b8cff" stroke-width="2"/><circle cx="34" cy="32" r="16" fill="#8b8cff" filter="url(#glow)"/><text x="34" y="38" text-anchor="middle" fill="#121216" font-size="12" font-weight="800">CF</text><text x="20" y="66" fill="#f2efea" font-size="18">Cloudflare edge</text></g>
+
+    <g transform="translate(100 405)"><rect width="180" height="92" rx="18" fill="#282832" stroke="#8b8cff"/><circle cx="34" cy="33" r="16" fill="#8b8cff"/><text x="34" y="39" text-anchor="middle" fill="#111115" font-size="12" font-weight="800">PX</text><text x="20" y="72" fill="#f2efea" font-size="18">Work Proxmox</text></g>
+    <g transform="translate(320 405)"><rect width="150" height="92" rx="18" fill="#202027" stroke="#5ac9b2"/><circle cx="32" cy="33" r="15" fill="#5ac9b2"/><text x="32" y="39" text-anchor="middle" fill="#111115" font-size="11" font-weight="800">PC</text><text x="18" y="72" fill="#f2efea" font-size="17">Work PC</text></g>
+    <g transform="translate(510 405)"><rect width="150" height="92" rx="18" fill="#202027" stroke="#5ac9b2"/><circle cx="32" cy="33" r="15" fill="#5ac9b2"/><text x="32" y="39" text-anchor="middle" fill="#111115" font-size="11" font-weight="800">MB</text><text x="18" y="72" fill="#f2efea" font-size="17">MacBook</text></g>
+    <g transform="translate(700 405)"><rect width="150" height="92" rx="18" fill="#202027" stroke="#5ac9b2"/><circle cx="32" cy="33" r="15" fill="#5ac9b2"/><text x="32" y="39" text-anchor="middle" fill="#111115" font-size="11" font-weight="800">LT</text><text x="18" y="72" fill="#f2efea" font-size="17">Laptop</text></g>
+    <g transform="translate(890 405)"><rect width="150" height="92" rx="18" fill="#202027" stroke="#5ac9b2"/><circle cx="32" cy="33" r="15" fill="#5ac9b2"/><text x="32" y="39" text-anchor="middle" fill="#111115" font-size="11" font-weight="800">HP</text><text x="18" y="72" fill="#f2efea" font-size="17">Home PC</text></g>
+    <g transform="translate(1080 405)"><rect width="180" height="92" rx="18" fill="#282832" stroke="#8b8cff"/><circle cx="34" cy="33" r="16" fill="#8b8cff"/><text x="34" y="39" text-anchor="middle" fill="#111115" font-size="11" font-weight="800">PI</text><text x="20" y="72" fill="#f2efea" font-size="17">Raspberry Pi 5</text></g>
+  </g>
+
+  <g fill="none" stroke="#70707c" stroke-width="3"><path d="M190 497V735H690"/><path d="M1170 497V735H1450"/></g>
+  <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="16">
+    <g transform="translate(100 720)"><rect width="145" height="120" rx="18" fill="#202027" stroke="#575762"/><circle cx="28" cy="30" r="13" fill="#8b8cff"/><text x="28" y="35" text-anchor="middle" fill="#111115" font-size="10" font-weight="800">N8N</text><text x="18" y="78" fill="#f2efea">n8n</text><text x="18" y="103" fill="#8c8b95" font-size="13">LXC service</text></g>
+    <g transform="translate(265 720)"><rect width="145" height="120" rx="18" fill="#202027" stroke="#575762"/><circle cx="28" cy="30" r="13" fill="#8b8cff"/><text x="28" y="35" text-anchor="middle" fill="#111115" font-size="10" font-weight="800">VW</text><text x="18" y="78" fill="#f2efea">Vaultwarden</text><text x="18" y="103" fill="#8c8b95" font-size="13">LXC service</text></g>
+    <g transform="translate(430 720)"><rect width="145" height="120" rx="18" fill="#202027" stroke="#f0c54b"/><circle cx="28" cy="30" r="13" fill="#f0c54b"/><text x="28" y="35" text-anchor="middle" fill="#111115" font-size="9" font-weight="800">WEB</text><text x="18" y="78" fill="#f2efea">Public stage</text><text x="18" y="103" fill="#8c8b95" font-size="13">Tunnel target</text></g>
+    <g transform="translate(595 720)"><rect width="145" height="120" rx="18" fill="#202027" stroke="#575762"/><circle cx="28" cy="30" r="13" fill="#8b8cff"/><text x="28" y="35" text-anchor="middle" fill="#111115" font-size="10" font-weight="800">VM</text><text x="18" y="78" fill="#f2efea">VM guests</text><text x="18" y="103" fill="#8c8b95" font-size="13">Private only</text></g>
+    <g transform="translate(860 720)"><rect width="145" height="120" rx="18" fill="#202027" stroke="#575762"/><circle cx="28" cy="30" r="13" fill="#8b8cff"/><text x="28" y="35" text-anchor="middle" fill="#111115" font-size="10" font-weight="800">N8N</text><text x="18" y="78" fill="#f2efea">n8n</text><text x="18" y="103" fill="#8c8b95" font-size="13">Personal</text></g>
+    <g transform="translate(1025 720)"><rect width="145" height="120" rx="18" fill="#202027" stroke="#575762"/><circle cx="28" cy="30" r="13" fill="#8b8cff"/><text x="28" y="35" text-anchor="middle" fill="#111115" font-size="10" font-weight="800">VW</text><text x="18" y="78" fill="#f2efea">Vaultwarden</text><text x="18" y="103" fill="#8c8b95" font-size="13">Personal</text></g>
+    <g transform="translate(1190 720)"><rect width="145" height="120" rx="18" fill="#202027" stroke="#575762"/><circle cx="28" cy="30" r="13" fill="#8b8cff"/><text x="28" y="35" text-anchor="middle" fill="#111115" font-size="10" font-weight="800">HA</text><text x="18" y="78" fill="#f2efea">Home Assistant</text><text x="18" y="103" fill="#8c8b95" font-size="13">Local control</text></g>
+    <g transform="translate(1355 720)"><rect width="145" height="120" rx="18" fill="#202027" stroke="#575762"/><circle cx="28" cy="30" r="13" fill="#8b8cff"/><text x="28" y="35" text-anchor="middle" fill="#111115" font-size="10" font-weight="800">MC</text><text x="18" y="78" fill="#f2efea">Minecraft</text><text x="18" y="103" fill="#8c8b95" font-size="13">Game server</text></g>
+  </g>
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="15" fill="#9695a0"><circle cx="98" cy="944" r="5" fill="#f0c54b"/><text x="115" y="950">PUBLIC PATH</text><circle cx="310" cy="944" r="5" fill="#5ac9b2"/><text x="327" y="950">PRIVATE MESH</text><circle cx="532" cy="944" r="5" fill="#8b8cff"/><text x="549" y="950">OUTBOUND TUNNEL</text></g>
+</svg>

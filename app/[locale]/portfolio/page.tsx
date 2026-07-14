@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { BrowserFrame } from "@/components/browser-frame";
 import { SiteHeader } from "@/components/site-header";
 import {
   localizePortfolioProject,
@@ -81,25 +82,27 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]/por
           </header>
           <div className="personal-grid">
             {personalProjects.map((project) => (
-              <article className="personal-card" key={project.slug}>
+              <article className={`personal-card${project.highlighted ? " personal-card-featured" : ""}`} key={project.slug}>
                 <Link className="project-image-link" href={`/portfolio/${project.slug}`} tabIndex={-1} aria-hidden="true">
                   <Image
                     src={project.images[0].src}
                     alt=""
-                    width={1600}
-                    height={1000}
+                    fill
                     sizes="(max-width: 800px) calc(100vw - 40px), 31vw"
                   />
                 </Link>
-                <div className="card-meta">
-                  <span>{project.year}</span>
-                  <span>{project.techStack.slice(0, 2).join(" + ")}</span>
+                <div className="personal-card-body">
+                  {project.highlighted && <p className="featured-project-label">{t("highlightedProject")}</p>}
+                  <div className="card-meta">
+                    <span>{project.year}</span>
+                    <span>{project.techStack.slice(0, 2).join(" + ")}</span>
+                  </div>
+                  <h3><Link href={`/portfolio/${project.slug}`}>{project.title}</Link></h3>
+                  <p>{project.summary}</p>
+                  <Link className="text-link" href={`/portfolio/${project.slug}`}>
+                    {t("viewProject")} <span aria-hidden="true">↗</span>
+                  </Link>
                 </div>
-                <h3><Link href={`/portfolio/${project.slug}`}>{project.title}</Link></h3>
-                <p>{project.summary}</p>
-                <Link className="text-link" href={`/portfolio/${project.slug}`}>
-                  {t("viewProject")} <span aria-hidden="true">↗</span>
-                </Link>
               </article>
             ))}
           </div>
@@ -118,13 +121,15 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]/por
             {websites.map((project, index) => (
               <article className="website-card" key={project.slug}>
                 <Link className="website-image" href={`/portfolio/${project.slug}`} tabIndex={-1} aria-hidden="true">
-                  <Image
-                    src={project.images[0].src}
-                    alt=""
-                    width={1920}
-                    height={1080}
-                    sizes="(max-width: 800px) calc(100vw - 40px), 58vw"
-                  />
+                  <BrowserFrame title={project.title} url={project.links?.live?.href} compact>
+                    <Image
+                      src={project.images[0].src}
+                      alt=""
+                      width={1920}
+                      height={1080}
+                      sizes="(max-width: 800px) calc(100vw - 40px), 58vw"
+                    />
+                  </BrowserFrame>
                 </Link>
                 <div className="website-copy">
                   <div className="card-meta">

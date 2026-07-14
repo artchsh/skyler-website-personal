@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Virtual Gamepad controller</title>
+  <desc id="desc">A landscape phone showing a dark virtual Xbox controller with sticks, D-pad, triggers, and face buttons.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="35%" r="80%">
+      <stop offset="0" stop-color="#292933"/>
+      <stop offset="1" stop-color="#101014"/>
+    </radialGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#1d1d22"/>
+      <stop offset="1" stop-color="#101013"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="36" stdDeviation="30" flood-color="#000" flood-opacity=".48"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="185" cy="150" r="210" fill="#8b8cff" opacity=".08"/>
+  <circle cx="1435" cy="850" r="280" fill="#8b8cff" opacity=".06"/>
+  <g filter="url(#shadow)">
+    <rect x="115" y="190" width="1370" height="620" rx="105" fill="#08080a" stroke="#4b4b56" stroke-width="5"/>
+    <rect x="142" y="217" width="1316" height="566" rx="79" fill="url(#screen)"/>
+    <rect x="779" y="225" width="42" height="11" rx="5.5" fill="#050506"/>
+  </g>
+  <g fill="none" stroke="#777784" stroke-width="4">
+    <circle cx="366" cy="505" r="112" fill="#0c0c0f"/>
+    <circle cx="366" cy="505" r="54" fill="#4a4a54" stroke="#a4a4ae"/>
+    <circle cx="617" cy="650" r="98" fill="#0c0c0f"/>
+    <circle cx="617" cy="650" r="48" fill="#555560" stroke="#a4a4ae"/>
+    <circle cx="980" cy="650" r="98" fill="#0c0c0f"/>
+    <circle cx="980" cy="650" r="48" fill="#555560" stroke="#a4a4ae"/>
+  </g>
+  <g fill="#f4f2ed" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700" text-anchor="middle">
+    <path d="M366 422l-25 35h50zM366 588l-25-35h50zM283 505l35-25v50zM449 505l-35-25v50z"/>
+    <text x="617" y="658" font-size="26">LS</text>
+    <text x="980" y="658" font-size="26">RS</text>
+  </g>
+  <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="32" font-weight="800" text-anchor="middle">
+    <circle cx="1238" cy="424" r="46" fill="#f1c84b"/><text x="1238" y="435" fill="#151518">Y</text>
+    <circle cx="1238" cy="574" r="46" fill="#65c66c"/><text x="1238" y="585" fill="#151518">A</text>
+    <circle cx="1163" cy="499" r="46" fill="#5d9df2"/><text x="1163" y="510" fill="#151518">X</text>
+    <circle cx="1313" cy="499" r="46" fill="#ef6a74"/><text x="1313" y="510" fill="#151518">B</text>
+  </g>
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="24" font-weight="700" text-anchor="middle">
+    <rect x="198" y="264" width="128" height="82" rx="24" fill="#2c2c33" stroke="#777784" stroke-width="3"/><text x="262" y="313" fill="#f4f2ed">LT</text>
+    <rect x="338" y="282" width="105" height="64" rx="22" fill="#2c2c33" stroke="#777784" stroke-width="3"/><text x="390" y="322" fill="#f4f2ed">LB</text>
+    <rect x="1157" y="282" width="105" height="64" rx="22" fill="#2c2c33" stroke="#777784" stroke-width="3"/><text x="1210" y="322" fill="#f4f2ed">RB</text>
+    <rect x="1274" y="264" width="128" height="82" rx="24" fill="#2c2c33" stroke="#777784" stroke-width="3"/><text x="1338" y="313" fill="#f4f2ed">RT</text>
+  </g>
+  <g fill="#bdbdc7" font-family="ui-sans-serif,system-ui,sans-serif" font-size="18">
+    <text x="196" y="258">CONTROLS</text>
+    <circle cx="1287" cy="252" r="8" fill="#ef5964"/><text x="1305" y="259">Disconnected</text>
+  </g>
+  <g fill="#d4d4dc">
+    <circle cx="727" cy="303" r="25" fill="#303038"/><path d="M716 303h22M727 292v22" stroke="#d4d4dc" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="800" cy="303" r="25" fill="#303038"/><path d="M788 303h24M800 291v24" stroke="#8b8cff" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="873" cy="303" r="25" fill="#303038"/><path d="M862 296h22M862 303h22M862 310h22" stroke="#d4d4dc" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text x="800" y="905" fill="#8b8cff" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="24" letter-spacing="4" text-anchor="middle">IPHONE → WEBSOCKET → XINPUT</text>
+</svg>
