@@ -9,10 +9,10 @@ const liveLink = (href: string) => ({
 
 export const workPortfolioProjects: WebsiteProject[] = [
   {
-    slug: "modernization-meks",
+    slug: "meks",
     kind: "website",
-    year: "2026",
-    title: { en: "Modernization / MEKS", ru: "Модернизация / МЭКС" },
+    year: "2025-2026",
+    title: { en: "MEKS", ru: "МЭКС" },
     summary: {
       en: "A multilingual public platform for exploring Kazakhstan's utility-modernization projects, progress, funding, documents, and news.",
       ru: "Многоязычная публичная платформа о проектах модернизации коммунальной инфраструктуры Казахстана, их ходе, финансировании, документах и новостях.",
@@ -28,7 +28,6 @@ export const workPortfolioProjects: WebsiteProject[] = [
     techStack: [
       "MODX Revolution 3",
       "PHP",
-      "Fenom",
       "pdoTools",
       "MIGX",
       "MODX TVs",
@@ -96,15 +95,15 @@ export const workPortfolioProjects: WebsiteProject[] = [
         ru: "Объединить повторяющиеся хелперы и обработку переводов, затем добавить автоматические тесты для поиска и комбинаций фильтров.",
       },
       {
-        en: "Formalize the CMS-to-frontend contract so future API or developer integrations can evolve with less coupling.",
-        ru: "Формализовать контракт между CMS и frontend, чтобы будущие API- и developer-интеграции развивались с меньшей связанностью.",
+        en: "Optimise and simplify code inside the templates and such for more quick work of the website and losing the technical debt.",
+        ru: "Оптимизировать и упростить код внутри шаблонов для более быстрой работы сайта и избавления от технического долга",
       },
     ],
   },
   {
     slug: "nofake",
     kind: "website",
-    year: "2025–2026",
+    year: "2025",
     title: { en: "NoFake", ru: "NoFake" },
     summary: {
       en: "A bilingual fact-checking and media-literacy publication covering misinformation, investigations, digital safety, and verification.",
@@ -112,7 +111,7 @@ export const workPortfolioProjects: WebsiteProject[] = [
     },
     description: {
       en: "I created the custom WordPress theme and have continued supporting the live publication through maintenance, bug fixes, and production troubleshooting. The project is less a one-off build than a long-running editorial system shaped by real browser, content, WordPress, and third-party integration issues.",
-      ru: "Я создал кастомную тему WordPress и продолжаю поддерживать работающую редакционную платформу: обслуживание, исправление ошибок и решение production-проблем. Это не разовая сборка, а долгоживущая система, сформированная реальными особенностями браузеров, контента, WordPress и сторонних интеграций.",
+      ru: "Я создал кастомную тему WordPress и продолжаю поддерживать работающую редакционную платформу: обслуживание, исправление ошибок и решение production-проблем. Это долгоживущая система, сформированная реальными особенностями браузеров, контента, WordPress и сторонних интеграций.",
     },
     role: { en: "Frontend / WordPress Developer", ru: "Frontend / WordPress-разработчик" },
     techStack: ["WordPress", "PHP", "Custom WordPress theme", "HTML", "SCSS", "CSS", "JavaScript", "WordPress APIs"],
@@ -249,14 +248,14 @@ export const workPortfolioProjects: WebsiteProject[] = [
       ru: "Независимое казахстанское деловое издание о рынках, банках, компаниях, экономической политике, аналитике и мнениях.",
     },
     description: {
-      en: "I handled frontend development and CMS-driven page implementation, translating design and editorial requirements into responsive production pages. The work included dynamic MODX content, reusable frontend patterns, multilingual handling where needed, SEO, maintenance, and post-launch fixes.",
-      ru: "Я занимался frontend-разработкой и реализацией страниц на CMS, переводя дизайн и редакционные требования в адаптивные production-страницы. Работа включала динамический контент MODX, переиспользуемые frontend-паттерны, многоязычность там, где она требовалась, SEO, поддержку и исправления после запуска.",
+      en: "I handled frontend development and CMS-driven page implementation, translating design and editorial requirements into responsive production pages. The work included dynamic Wordpress content, reusable frontend patterns, multilingual handling where needed, SEO, maintenance, and post-launch fixes.",
+      ru: "Я занимался frontend-разработкой и реализацией страниц на CMS, переводя дизайн и редакционные требования в адаптивные production-страницы. Работа включала динамический контент Wordpress, переиспользуемые frontend-паттерны, многоязычность там, где она требовалась, SEO, поддержку и исправления после запуска.",
     },
     role: {
       en: "Frontend / CMS Developer at Media Boost Group",
       ru: "Frontend / CMS-разработчик в Media Boost Group",
     },
-    techStack: ["MODX Revolution 3", "PHP", "Fenom", "pdoTools", "MIGX", "HTML", "SCSS", "JavaScript", "TypeScript", "Vite", "Handlebars"],
+    techStack: ["Wordpress", "PHP", "HTML", "SCSS", "JavaScript", "TypeScript", "Vite", "Handlebars"],
     images: [
       {
         src: "/portfolio/work/manualeconomy/home-1920x1080.jpg",
