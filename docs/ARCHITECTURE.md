@@ -29,7 +29,7 @@ Build and runtime
 The application uses the Next.js App Router.
 
 - `app/page.tsx` defines metadata for the bare root and immediately redirects `/` to `/ru`.
-- `app/[locale]/layout.tsx` is the localized root layout. It validates the locale, supplies translated metadata, sets `<html lang>`, and mounts `NextIntlClientProvider`.
+- `app/[locale]/layout.tsx` is the localized root layout. It validates the locale, supplies translated metadata, sets `<html lang>`, mounts `NextIntlClientProvider`, and injects the deferred self-hosted Umami tracker into the document head.
 - `app/[locale]/page.tsx` renders the homepage.
 - `app/[locale]/portfolio/page.tsx` renders the two portfolio categories.
 - `app/[locale]/portfolio/[slug]/page.tsx` renders every personal project and website case study.
@@ -66,6 +66,10 @@ Client Components are limited to behavior that requires browser state:
 - `components/homelab-architecture.tsx` for selectable SVG nodes and the live topology inspector.
 
 The Homelab component supports pointer, focus, Enter, and Space interactions. Animation is CSS/SMIL-based and disabled or reduced under `prefers-reduced-motion`.
+
+## Analytics
+
+The localized root layout loads the self-hosted Umami tracker on every rendered page. It uses Next.js `Script` with `strategy="beforeInteractive"`, which injects the deferred external script into the document head. The public site identifier is attached through `data-website-id`; there is no analytics SDK package or Worker-side analytics binding.
 
 ## Content flow
 

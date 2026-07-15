@@ -65,7 +65,7 @@ The production domain is configured as `1410666.xyz` in both the site metadata s
 
 ## Deployment decisions
 
-The site intentionally uses no database, CMS, authentication, analytics, backend service, or external storage. OpenNext deploys the Next.js output to Cloudflare Workers with static assets bound as `ASSETS`.
+The site intentionally uses no database, CMS, authentication, backend service, or external storage. OpenNext deploys the Next.js output to Cloudflare Workers with static assets bound as `ASSETS`. Page-view analytics are collected by a self-hosted Umami script injected from the locale root layout; no analytics package or Worker binding is required.
 
 The Worker uses:
 

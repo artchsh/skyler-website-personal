@@ -28,7 +28,7 @@ When documentation and code disagree, use this order:
 - Five personal projects and five website case studies.
 - Portfolio routes are public but deliberately `noindex` and absent from the sitemap.
 - OpenNext deployment to a Cloudflare Worker with repository-local static assets.
-- No database, authentication, analytics, CMS, or runtime storage bindings.
+- No database, authentication, CMS, or runtime storage bindings; page views use self-hosted Umami analytics.
 - React Doctor score: 100/100 after the 15 July 2026 full-project audit.
 
 ## Standard validation

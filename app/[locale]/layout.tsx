@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { routing } from "@/i18n/routing";
 import { siteConfig } from "@/data/site";
 import "../globals.css";
@@ -80,6 +81,12 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
       <body>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
+      <Script
+        defer
+        src="https://umami.1410555.xyz/script.js"
+        data-website-id="434b21b7-d46a-4a95-ad18-0a5ce449aa8b"
+        strategy="beforeInteractive"
+      />
     </html>
   );
 }

@@ -68,7 +68,7 @@ Identity, site URL, email, GitHub, X, Discord, and résumé settings are configu
 
 Place the real résumé at `public/skyler-cv.pdf`, then set `siteConfig.cvAvailable` to `true`. Until then, the public UI shows a disabled `Résumé soon` label; `public/CV-PLACEHOLDER.md` records the expected path.
 
-The site has no database, external storage, analytics, CMS, authentication, or backend service.
+The site has no database, external storage, CMS, authentication, or backend service. Page-view analytics are provided by a self-hosted Umami instance loaded from the locale root layout.
 
 ## Portfolio content
 
