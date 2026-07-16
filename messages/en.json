@@ -11,6 +11,7 @@
     "nav": {
       "home": "Home",
       "portfolio": "Portfolio",
+      "blog": "Blog",
       "things": "Things",
       "links": "Links"
     }
@@ -41,7 +42,27 @@
   "LanguageSwitcher": {
     "label": "Language",
     "ru": "RU",
-    "en": "EN"
+    "en": "EN",
+    "unavailable": "This article is not available in this language"
+  },
+  "Blog": {
+    "eyebrow": "Field notes / systems and side effects",
+    "title": "Notes from the machinery.",
+    "intro": "Things learned while building websites, operating small infrastructure, and following technical questions further than necessary.",
+    "archive": "Writing archive",
+    "postCount": "{count, plural, =0 {No published notes yet} one {# published note} other {# published notes}}",
+    "empty": "Nothing published yet. The machinery is running; the notes are still being edited.",
+    "draft": "Local draft",
+    "readArticle": "Read note",
+    "readingTime": "{count, plural, one {# minute read} other {# minute read}}",
+    "author": "Author",
+    "published": "Published",
+    "updated": "Updated",
+    "contents": "In this note",
+    "back": "Back to writing",
+    "next": "Next note",
+    "rss": "RSS feed",
+    "indexDescription": "Technical notes by Skyler about web systems, infrastructure, self-hosting, and the awkward machinery between them."
   },
   "Portfolio": {
     "eyebrow": "Selected work / engineering case studies",

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The repository is a statically generated, bilingual personal website deployed as a Cloudflare Worker through OpenNext. Content is authored in TypeScript and JSON; there is no runtime content API or database.
+The repository is a statically generated, bilingual personal website deployed as a Cloudflare Worker through OpenNext. Content is authored in TypeScript, JSON, and Markdown; there is no runtime content API or database.
 
 ```text
 Browser
@@ -11,13 +11,20 @@ Browser
   └─ /[locale]                 → locale layout and translated pages
        ├─ /[locale]            → homepage
        ├─ /[locale]/portfolio  → noindex portfolio index
-       └─ /[locale]/portfolio/[slug]
-                                → noindex statically generated project page
+       ├─ /[locale]/portfolio/[slug]
+       │                        → noindex statically generated project page
+       ├─ /[locale]/blog       → indexed writing archive
+       ├─ /[locale]/blog/[slug]
+       │                        → indexed static article or local-only draft
+       └─ /[locale]/blog/rss.xml
+                                → localized RSS feed
 
 Typed content
   ├─ data/site.ts              → identity, canonical origin, public links
   ├─ data/portfolio.ts         → personal projects and shared types
   ├─ data/work-portfolio.ts    → website case studies
+  ├─ content/blog/*.md         → one-file article sources
+  ├─ data/blog.generated.ts    → generated source bundle
   └─ messages/{en,ru}.json     → interface translations
 
 Build and runtime
@@ -29,10 +36,13 @@ Build and runtime
 The application uses the Next.js App Router.
 
 - `app/page.tsx` defines metadata for the bare root and immediately redirects `/` to `/ru`.
-- `app/[locale]/layout.tsx` is the localized root layout. It validates the locale, supplies translated metadata, sets `<html lang>`, mounts `NextIntlClientProvider`, and injects the deferred self-hosted Umami tracker into the document head.
+- `app/[locale]/layout.tsx` is the localized root layout. It validates the locale, supplies translated metadata, sets `<html lang>`, mounts `NextIntlClientProvider`, and loads the self-hosted Umami tracker after hydration.
 - `app/[locale]/page.tsx` renders the homepage.
 - `app/[locale]/portfolio/page.tsx` renders the two portfolio categories.
 - `app/[locale]/portfolio/[slug]/page.tsx` renders every personal project and website case study.
+- `app/[locale]/blog/page.tsx` renders the localized writing archive.
+- `app/[locale]/blog/[slug]/page.tsx` renders generated Markdown articles.
+- `app/[locale]/blog/rss.xml/route.ts` produces one static RSS feed per locale.
 
 Both supported locales and all project slugs are returned from `generateStaticParams`. Project lookup still performs an explicit `notFound()` check so an unknown slug returns 404.
 
@@ -69,7 +79,7 @@ The Homelab component supports pointer, focus, Enter, and Space interactions. An
 
 ## Analytics
 
-The localized root layout loads the self-hosted Umami tracker on every rendered page. It uses Next.js `Script` with `strategy="beforeInteractive"`, which injects the deferred external script into the document head. The public site identifier is attached through `data-website-id`; there is no analytics SDK package or Worker-side analytics binding.
+The localized root layout loads the self-hosted Umami tracker on every rendered page. It uses Next.js `Script` with `strategy="afterInteractive"`, so analytics loads non-blockingly after hydration without placing a client-rendered script inside an explicit React `<head>`. The public site identifier is attached through `data-website-id`; there is no analytics SDK package or Worker-side analytics binding.
 
 ## Content flow
 
@@ -92,6 +102,25 @@ Server-rendered index/detail page
 ```
 
 Website content is kept in `data/work-portfolio.ts` to keep the larger case-study records separate from personal-project content.
+
+Blog content follows a separate one-file pipeline:
+
+```text
+content/blog/<slug>.<locale>.md
+       │
+       ▼  scripts/generate-blog-sources.mjs
+data/blog.generated.ts
+       │
+       ▼  frontmatter + Markdown AST validation
+lib/blog.ts
+       │
+       ├─ archive and article pages
+       ├─ metadata and translation alternates
+       ├─ sitemap entries
+       └─ localized RSS feeds
+```
+
+The generated module embeds raw Markdown into the application bundle. This avoids filesystem reads inside the Cloudflare Worker while letting authors maintain only the Markdown file. Development and build commands regenerate it before Next.js starts.
 
 ## Media architecture
 
@@ -122,7 +151,7 @@ Noindex is not access control. Anyone with a portfolio URL can still open the pa
 
 ## Styling
 
-Tailwind CSS 4 is installed and processed through PostCSS. The current site, however, is primarily styled by the hand-authored editorial system in `app/globals.css`, with semantic color variables and responsive media queries. The shadcn/Base UI button primitive uses Tailwind utilities.
+Tailwind CSS 4 is installed and processed through PostCSS. The homepage and portfolio are primarily styled by the hand-authored editorial system in `app/globals.css`, with semantic color variables and responsive media queries. The blog and Markdown renderer use Tailwind utilities, as does the shadcn/Base UI button primitive.
 
 This is a mixed styling architecture. New work should either follow the existing global editorial system intentionally or be part of a planned Tailwind migration; adding a third styling pattern should be avoided.
 

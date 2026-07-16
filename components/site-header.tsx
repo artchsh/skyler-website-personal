@@ -1,12 +1,14 @@
 import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 
 type SiteHeaderProps = {
-  current?: "home" | "portfolio";
+  current?: "home" | "portfolio" | "blog";
+  availableLocales?: readonly (typeof routing.locales)[number][];
 };
 
-export function SiteHeader({ current = "home" }: SiteHeaderProps) {
+export function SiteHeader({ current = "home", availableLocales }: SiteHeaderProps) {
   const t = useTranslations("Header");
 
   return (
@@ -15,10 +17,11 @@ export function SiteHeader({ current = "home" }: SiteHeaderProps) {
         Skyler<span aria-hidden="true">.</span>
       </Link>
       <nav aria-label={t("navLabel")}>
-        <Link href="/" aria-current={current === "home" ? "page" : undefined}>{t("nav.home")}</Link>
+        <Link className="nav-home" href="/" aria-current={current === "home" ? "page" : undefined}>{t("nav.home")}</Link>
         <Link href="/portfolio" aria-current={current === "portfolio" ? "page" : undefined}>{t("nav.portfolio")}</Link>
+        <Link href="/blog" aria-current={current === "blog" ? "page" : undefined}>{t("nav.blog")}</Link>
       </nav>
-      <LanguageSwitcher />
+      <LanguageSwitcher availableLocales={availableLocales} />
     </header>
   );
 }

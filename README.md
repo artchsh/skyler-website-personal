@@ -80,3 +80,16 @@ Portfolio entries live in `data/portfolio.ts`. Each entry has bilingual copy, a 
 - Sample artwork lives in `public/portfolio/` and can be replaced without changing the page components when the file paths stay the same.
 
 The portfolio index is available at `/ru/portfolio` and `/en/portfolio`. Detail pages are statically generated from each project's `slug`.
+
+## Blog content
+
+Blog posts are ordinary repository-local Markdown files under `content/blog/`. The filename supplies the slug and locale, so there is no separate post registry to maintain:
+
+```text
+content/blog/building-my-homelab.en.md
+content/blog/building-my-homelab.ru.md
+```
+
+The first `#` heading becomes the title and the first normal paragraph becomes the archive summary. Add a frontmatter `date` to publish; a missing date or `draft: true` keeps the post local-only. `bun run dev`, `bun run build`, and all Cloudflare build/deploy scripts regenerate the typed source bundle automatically.
+
+See `docs/BLOG.md` for optional metadata, custom blocks, translation pairing, RSS, and the complete authoring workflow.

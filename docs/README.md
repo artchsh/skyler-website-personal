@@ -6,6 +6,7 @@ This folder documents the current implementation of Skyler's personal website. I
 
 - [ARCHITECTURE.md](./ARCHITECTURE.md) — application structure, rendering boundaries, routing, localization, content flow, metadata, and assets.
 - [PORTFOLIO.md](./PORTFOLIO.md) — typed portfolio model, project categories, media conventions, privacy behavior, and the process for adding a project.
+- [BLOG.md](./BLOG.md) — one-file Markdown authoring, derived fields, drafts, translations, custom blocks, RSS, and publishing behavior.
 - [DEPLOYMENT.md](./DEPLOYMENT.md) — Bun development, Next.js and OpenNext builds, Cloudflare configuration, release checks, and known deployment gotchas.
 - [FINDINGS.md](./FINDINGS.md) — React Doctor results, resolved findings, remaining risks, and recommended follow-up work.
 - [DESIGN.md](./DESIGN.md) — the current editorial visual direction and responsive behavior.
@@ -16,7 +17,7 @@ This folder documents the current implementation of Skyler's personal website. I
 
 When documentation and code disagree, use this order:
 
-1. Runtime code and typed content under `app/`, `components/`, and `data/`.
+1. Runtime code and content under `app/`, `components/`, `content/`, `data/`, and `lib/`.
 2. Deployment files: `next.config.ts`, `open-next.config.ts`, `wrangler.jsonc`, and `public/_headers`.
 3. Current documents in this folder.
 4. Historical notes and draft research.
@@ -25,7 +26,7 @@ When documentation and code disagree, use this order:
 
 - Next.js 16.2 with React 19 and TypeScript.
 - Russian and English locale-prefixed routes using `next-intl`.
-- Five personal projects and five website case studies.
+- Five personal projects, five website case studies, and a repository-local Markdown blog.
 - Portfolio routes are public but deliberately `noindex` and absent from the sitemap.
 - OpenNext deployment to a Cloudflare Worker with repository-local static assets.
 - No database, authentication, CMS, or runtime storage bindings; page views use self-hosted Umami analytics.

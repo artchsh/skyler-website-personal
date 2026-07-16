@@ -91,6 +91,12 @@ Discord links to Skyler's configured Discord user profile and displays the usern
 
 Disabled items are visually quieter but remain legible. They reveal a small `soon` hint on pointer hover without exposing configuration placeholders.
 
+## Blog
+
+The blog extends the same asymmetric editorial system instead of introducing conventional article cards. The index is a chronological writing archive with oversized titles, narrow metadata, restrained rules, and a visible local-draft state during development. Article heroes keep the portfolio's large type but transition into a quieter reading layout with a sticky table of contents and a capped text measure.
+
+Markdown typography, code, tables, notes, warnings, expandable details, and galleries are styled with Tailwind utilities in the renderer. Custom blocks retain plain-text source syntax and use the existing lavender accent, with yellow reserved for warnings and local-draft status.
+
 ## Color and typography
 
 Semantic colors are defined in `app/globals.css`:

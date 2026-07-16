@@ -27,6 +27,8 @@ bun run build
 
 React Doctor reads `doctor.config.json`, which excludes `.next/**` and `.open-next/**`. Those directories contain generated framework and deployment bundles rather than authored application source.
 
+`dev`, `build`, `build:cloudflare`, `preview`, and `deploy` run `blog:generate` first. This step must remain in the scripts: the deployed Worker cannot discover repository Markdown files at runtime, so `data/blog.generated.ts` embeds the validated sources during the build.
+
 ## Cloudflare production build
 
 ```bash
@@ -38,7 +40,7 @@ This performs a Next.js production build and then generates:
 - `.open-next/worker.js`
 - `.open-next/assets/`
 
-The expected route table contains static localized homepages, the two portfolio indexes, and every localized project slug.
+The expected route table contains static localized homepages, blog archives and RSS feeds, the two portfolio indexes, every localized project slug, and every published blog slug. Draft article routes must be absent from production output.
 
 ## Worker preview and route verification
 
@@ -56,6 +58,11 @@ GET /ru/portfolio                        → 200
 GET /en/portfolio/<known-slug>           → 200
 GET /ru/portfolio/<known-slug>           → 200
 GET /en/portfolio/not-a-project          → 404
+GET /en/blog                             → 200
+GET /ru/blog                             → 200
+GET /en/blog/<published-slug>            → 200
+GET /en/blog/not-an-article              → 404
+GET /en/blog/rss.xml                     → 200 application/rss+xml
 GET /portfolio/personal/homelab/architecture.svg → 200
 ```
 
@@ -113,8 +120,8 @@ There is no middleware/proxy. All internal links and redirects must respect the 
 1. Confirm the intended Git diff and media assets.
 2. Run ESLint, TypeScript, and React Doctor.
 3. Run the full Cloudflare build.
-4. Preview the Worker and verify known/unknown project routes.
+4. Preview the Worker and verify known/unknown project and blog routes plus both RSS feeds.
 5. Review portfolio screenshots for public information.
-6. Confirm portfolio pages still emit `noindex` and are absent from the sitemap.
+6. Confirm portfolio pages still emit `noindex`, published blog posts are indexed, and drafts are absent from the sitemap and RSS.
 7. Deploy with Wrangler.
 8. Verify canonical redirects, security headers, and primary pages at the Cloudflare edge.

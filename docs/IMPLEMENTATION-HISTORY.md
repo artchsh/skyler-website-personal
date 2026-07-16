@@ -120,3 +120,9 @@ The current personal-project collection contains Homelab Infrastructure, Virtual
 On 15 July 2026, the repository was scanned with `bunx react-doctor@latest --verbose`. Three authored-source warnings were fixed: root-page metadata was added, the language switcher stopped subscribing to a pathname used only inside its click handler, and an unused non-component export was removed from the button primitive.
 
 Four remaining warnings were traced to generated `.open-next` output rather than application source. `doctor.config.json` now ignores `.next/**` and `.open-next/**` without disabling any diagnostic rules. The final scan scored 100/100. See `FINDINGS.md` for the classifications and follow-up risks.
+
+## Markdown blog
+
+The blog uses ordinary Markdown rather than MDX so authors never need a separate metadata registry or JSX knowledge. Files follow `<slug>.<locale>.md`; the filename provides routing and translation pairing, the first H1 provides the title, and the first paragraph provides the default summary.
+
+A small generation step embeds Markdown sources into `data/blog.generated.ts` before development and production builds. Runtime parsing validates frontmatter, derives reading time and heading links, and exposes typed data to the archive, article metadata, sitemap, and localized RSS routes. Controlled remark directives provide notes, warnings, details, and galleries without allowing arbitrary executable components in content.

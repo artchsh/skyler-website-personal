@@ -80,13 +80,12 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
     <html lang={locale} data-scroll-behavior="smooth">
       <body>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <Script
+          src="https://umami.1410555.xyz/script.js"
+          data-website-id="434b21b7-d46a-4a95-ad18-0a5ce449aa8b"
+          strategy="afterInteractive"
+        />
       </body>
-      <Script
-        defer
-        src="https://umami.1410555.xyz/script.js"
-        data-website-id="434b21b7-d46a-4a95-ad18-0a5ce449aa8b"
-        strategy="beforeInteractive"
-      />
     </html>
   );
 }
