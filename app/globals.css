@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../scripts/generate-blog-sources.mjs";
 
 :root {
   --background: #111113;

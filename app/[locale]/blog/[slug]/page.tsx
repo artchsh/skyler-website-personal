@@ -115,7 +115,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   setRequestLocale(locale);
   const t = await getTranslations("Blog");
   const headerT = await getTranslations("Header");
-  const externalT = await getTranslations("Elsewhere");
   const articleUrl = new URL(`/${locale}/blog/${slug}`, siteConfig.url).toString();
   const blogUrl = new URL(`/${locale}/blog`, siteConfig.url).toString();
   const authorUrl = new URL(`/${locale}`, siteConfig.url).toString();
@@ -235,7 +234,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <BlogTableOfContents headings={post.headings} label={t("contents")} />
           )}
           <div className="min-w-0 max-w-[44rem]">
-            <BlogMarkdown content={post.body} externalLabel={externalT("opensNewTab")} />
+            <BlogMarkdown content={post.bodyHtml} />
           </div>
         </div>
         </article>

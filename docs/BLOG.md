@@ -36,7 +36,7 @@ The first level-one heading becomes the article title. It is removed from the re
 
 ## Code blocks
 
-Use ordinary fenced Markdown and put the language after the opening fence. Code is highlighted at render time and does not ship a syntax-highlighting runtime to the browser.
+Use ordinary fenced Markdown and put the language after the opening fence. Code is highlighted at build time and does not ship a syntax-highlighting runtime to the browser.
 
 ````md
 ```ts
@@ -108,7 +108,7 @@ Bare root-relative paths are also accepted, but produce decorative images with e
 :::
 ```
 
-Unknown directives are not executable. New interactive block types must be deliberately added to `lib/blog-markdown.ts` and the Markdown renderer.
+Unknown directives are not executable. New interactive block types must be deliberately added to `scripts/generate-blog-sources.mjs` and the Markdown renderer.
 
 ## Links and media
 
@@ -126,7 +126,7 @@ Run the generator directly when needed:
 bun run blog:generate
 ```
 
-Normal development and deployment commands run it automatically. The generator validates filenames and writes `data/blog.generated.ts`; never edit that file by hand. It exists so the Cloudflare Worker receives Markdown content as bundled data instead of trying to read a filesystem at runtime.
+Normal development and deployment commands run it automatically. The generator validates filenames, renders each post to styled HTML, and writes `data/blog.generated.ts`; never edit that file by hand. It exists so the Cloudflare Worker receives finished HTML as bundled data instead of trying to read a filesystem or run a markdown pipeline at runtime.
 
 Adding a new file while `next dev` is already running requires restarting the dev command so the source list is regenerated. Editing an existing post also requires regeneration; run `bun run blog:generate` for an immediate refresh.
 
